@@ -1,0 +1,39 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', system-ui, sans-serif;
+  background: #f5f7fb;
+  color: #1c2333;
+  overscroll-behavior: none;
+}
+.page { max-width: 480px; margin: 0 auto; padding: 24px 20px; min-height: 100dvh; }
+.page.center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; }
+h1 { margin: 0; font-size: 32px; }
+.sub, .hint, .legal { color: #6b7385; font-size: 14px; margin: 0; }
+.legal a { color: inherit; }
+.error { color: #c62828; font-size: 14px; }
+.notice { background: #fff4e5; padding: 12px 14px; border-radius: 10px; }
+.btn { border: 1px solid #cdd3e0; background: #fff; border-radius: 12px; padding: 14px 20px; font-size: 16px; cursor: pointer; min-width: 130px; }
+.btn.primary { background: #3b6cf6; border-color: #3b6cf6; color: #fff; }
+.btn.danger { background: #fff; border-color: #c62828; color: #c62828; }
+.btn:disabled { opacity: .5; }
+.row { display: flex; gap: 12px; justify-content: center; }
+.top { width: 100%; display: flex; justify-content: space-between; font-size: 14px; color: #6b7385; }
+.count { font-weight: 600; color: #3b6cf6; }
+.card {
+  width: 100%; height: 320px; background: #fff; border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(30, 50, 100, .12);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  padding: 20px; user-select: none; touch-action: none; cursor: grab; position: relative;
+}
+.card.static { cursor: default; touch-action: auto; }
+.word { font-size: 40px; font-weight: 700; }
+.meaning { font-size: 30px; font-weight: 700; }
+.pos { color: #6b7385; }
+.example { color: #4a5266; font-size: 16px; font-style: italic; }
+.speak { border: none; background: #eef2ff; border-radius: 50%; width: 48px; height: 48px; font-size: 22px; cursor: pointer; }
+.foot { display: flex; gap: 20px; font-size: 14px; margin-top: 12px; }
+.foot a, .link { color: #6b7385; background: none; border: none; cursor: pointer; font-size: 14px; text-decoration: underline; }
+.done { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+.legal-page h2 { font-size: 18px; margin: 20px 0 4px; }
+.legal-page p { margin: 0; line-height: 1.6; }

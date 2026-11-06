@@ -1,0 +1,47 @@
+-- 샘플 단어 40개 (AI 초안, reviewed=false). 직접 검수 후 reviewed=true 로 바꾸세요.
+insert into public.words (word, meaning_ko, pos, example, level) values
+-- 레벨 1 (100~300)
+('schedule','일정, 시간표','n.','Please check the meeting schedule.',1),
+('meeting','회의','n.','The meeting starts at nine.',1),
+('customer','고객','n.','Every customer received a gift.',1),
+('manager','관리자, 매니저','n.','The manager approved the plan.',1),
+('order','주문(하다)','n./v.','We placed an order yesterday.',1),
+('price','가격','n.','The price is very reasonable.',1),
+('report','보고서','n.','She submitted the report on time.',1),
+('send','보내다','v.','Please send me the file.',1),
+('office','사무실','n.','His office is on the third floor.',1),
+('ticket','표, 티켓','n.','I bought two tickets for the show.',1),
+-- 레벨 2 (300~500)
+('deadline','마감 기한','n.','The deadline is next Friday.',2),
+('colleague','동료','n.','I had lunch with a colleague.',2),
+('attend','참석하다','v.','All staff must attend the training.',2),
+('receipt','영수증','n.','Keep the receipt for a refund.',2),
+('reserve','예약하다','v.','I would like to reserve a table.',2),
+('refund','환불(하다)','n./v.','You can get a full refund.',2),
+('appointment','약속, 예약','n.','I have a dental appointment today.',2),
+('department','부서','n.','She works in the sales department.',2),
+('delivery','배달','n.','Delivery takes two business days.',2),
+('employee','직원','n.','Each employee gets a badge.',2),
+-- 레벨 3 (500~700)
+('negotiate','협상하다','v.','They negotiated a better contract.',3),
+('supplier','공급업체','n.','We changed our main supplier.',3),
+('estimate','견적; 추정하다','n./v.','Please send a written estimate.',3),
+('inventory','재고','n.','The store checks its inventory weekly.',3),
+('renew','갱신하다','v.','You must renew your membership.',3),
+('reimburse','(비용을) 변제하다','v.','The company will reimburse travel costs.',3),
+('requirement','요건, 필요 조건','n.','Experience is a job requirement.',3),
+('vacancy','공석, 빈 방','n.','There is a vacancy in accounting.',3),
+('shipment','선적, 배송품','n.','The shipment arrived late.',3),
+('outstanding','미지급의; 뛰어난','adj.','There is an outstanding balance.',3),
+-- 레벨 4 (700~990)
+('comply','준수하다','v.','All firms must comply with the law.',4),
+('enforce','시행하다, 집행하다','v.','The city will enforce the new rule.',4),
+('liability','법적 책임','n.','The company denied any liability.',4),
+('amend','수정하다','v.','The contract was amended in May.',4),
+('fiscal','회계의, 재정의','adj.','The fiscal year ends in March.',4),
+('undertake','착수하다, 맡다','v.','They will undertake the renovation.',4),
+('preliminary','예비의','adj.','Preliminary results look promising.',4),
+('subsidiary','자회사','n.','It is a subsidiary of a larger firm.',4),
+('stipulate','규정하다, 명기하다','v.','The contract stipulates a 30-day notice.',4),
+('indemnify','보상하다','v.','The insurer will indemnify the owner.',4)
+on conflict (word) do nothing;
