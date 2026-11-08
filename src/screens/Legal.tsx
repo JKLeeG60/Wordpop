@@ -1,6 +1,6 @@
 // ⚠️ 초안입니다. 공개 전에 운영자 정보(이름/문의 이메일/시행일)를 채우고 검토하세요.
 const CONTACT: string =
-  (import.meta.env.VITE_CONTACT_EMAIL as string | undefined) || '(공개 전 문의용 이메일을 입력하세요)'
+  (import.meta.env.VITE_CONTACT_EMAIL as string | undefined) || 'jkleeg60@gmail.com'
 
 export function Privacy() {
   return (

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { configured, supabase } from './supabase'
 import { DEFAULT_PROFILE, demoStore, supabaseStore } from './lib/store'
 import { initAudio } from './lib/audio'
+import { ALL_LEVELS, WORD_MAP, isLevelLoaded, loadLevels } from './lib/words'
 import type { Profile, Progress, TestResult } from './lib/types'
 import Login from './screens/Login'
 import LevelTest from './screens/LevelTest'
@@ -55,6 +56,7 @@ function Main() {
   const [screen, setScreen] = useState<Screen>('home')
   const [studyOpts, setStudyOpts] = useState({ newCount: 0, reviewBudget: 0 })
   const [, setTick] = useState(0)
+  const [, setWv] = useState(0)
 
   useEffect(() => {
     initAudio()
@@ -106,6 +108,29 @@ function Main() {
     }
   }, [store])
 
+  // 필요한 레벨의 단어 파일만 불러온다 (레벨 테스트 중엔 전체, 평소엔 현재 레벨)
+  const need = !profile ? [] : !profile.tested || profile.level == null || screen === 'test' ? ALL_LEVELS : [profile.level]
+  const hasUnknown = !!progress && [...progress.keys()].some((id) => !WORD_MAP.has(id))
+  const toLoad = [...new Set([...need, ...(hasUnknown ? ALL_LEVELS : [])])].filter((l) => !isLevelLoaded(l))
+  const allLoaded = ALL_LEVELS.every(isLevelLoaded)
+  const wordsReady = !!profile && !!progress && need.every(isLevelLoaded) && (!hasUnknown || allLoaded)
+  useEffect(() => {
+    if (!toLoad.length) return
+    let alive = true
+    loadLevels(toLoad)
+      .then(() => alive && setWv((v) => v + 1))
+      .catch(() => alive && setLoadErr('단어를 불러오지 못했어요. 네트워크를 확인해 주세요.'))
+    return () => {
+      alive = false
+    }
+  }, [toLoad.join(',')]) // eslint-disable-line react-hooks/exhaustive-deps
+  // 지금은 없는 단어(예전 테스트 기록 등)는 목록에서 뺀다
+  useEffect(() => {
+    if (progress && hasUnknown && allLoaded) {
+      setProgress(new Map([...progress].filter(([id]) => WORD_MAP.has(id))))
+    }
+  }, [progress, hasUnknown, allLoaded])
+
   if (!authReady) return <main className="screen center center-text">불러오는 중…</main>
 
   if (!store) {
@@ -136,11 +161,22 @@ function Main() {
     )
   }
 
-  if (!profile || !progress) return <main className="screen center center-text">불러오는 중…</main>
+  if (!profile || !progress || !wordsReady) return <main className="screen center center-text">불러오는 중…</main>
 
   const patchProfile = (patch: Partial<Profile>) => {
     setProfile((p) => ({ ...(p ?? DEFAULT_PROFILE), ...patch }))
     store.saveProfile(patch).catch((e) => setLoadErr(e instanceof Error ? e.message : '저장 실패'))
+  }
+
+  // 레벨을 바꿀 때는 새 레벨 단어를 먼저 불러온 뒤 적용한다
+  async function changeLevel(level: number) {
+    await loadLevels([level])
+    patchProfile({ level })
+  }
+  const onSettingsChange = (patch: Partial<Profile>) => {
+    const { level, ...rest } = patch
+    if (level != null) changeLevel(level).catch(() => setLoadErr('단어를 불러오지 못했어요.'))
+    if (Object.keys(rest).length) patchProfile(rest)
   }
 
   async function finishTest(level: number, result: TestResult) {
@@ -169,7 +205,7 @@ function Main() {
         initial={[...progress.values()]}
         newCount={studyOpts.newCount}
         reviewBudget={studyOpts.reviewBudget}
-        onLevelUp={(level) => patchProfile({ level })}
+        onLevelUp={changeLevel}
         onExit={(list) => {
           setProgress(new Map(list.map((x) => [x.wordId, x])))
           setScreen('home')
@@ -183,7 +219,7 @@ function Main() {
       <Settings
         profile={profile}
         store={store}
-        onChange={patchProfile}
+        onChange={onSettingsChange}
         onRetest={() => {
           try {
             localStorage.removeItem('wp_test_draft')
@@ -208,7 +244,7 @@ function Main() {
         setScreen('study')
       }}
       onSettings={() => setScreen('settings')}
-      onLevelUp={() => patchProfile({ level: Math.min(4, (profile.level ?? 1) + 1) })}
+      onLevelUp={() => changeLevel(Math.min(4, (profile.level ?? 1) + 1))}
     />
   )
 }

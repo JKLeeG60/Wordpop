@@ -30,7 +30,7 @@ export default function Study({
   initial: Progress[]
   newCount: number
   reviewBudget: number
-  onLevelUp: (level: number) => void
+  onLevelUp: (level: number) => Promise<void>
   onExit: (p: Progress[]) => void
 }) {
   const map = useRef(new Map(initial.map((p) => [p.wordId, p])))
@@ -187,9 +187,13 @@ export default function Study({
         ) : nextLevel ? (
           <button
             className="btn primary block"
-            onClick={() => {
-              onLevelUp(nextLevel)
-              startMore(10, 0, nextLevel)
+            onClick={async () => {
+              try {
+                await onLevelUp(nextLevel)
+                startMore(10, 0, nextLevel)
+              } catch {
+                setErr('다음 레벨 단어를 불러오지 못했어요.')
+              }
             }}
           >
             이 레벨 단어를 모두 봤어요 → {LEVEL_NAMES[nextLevel]} 레벨로
