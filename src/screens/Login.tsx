@@ -20,7 +20,9 @@ export default function Login({ onDemo }: { onDemo: () => void }) {
         <span className="chip">TOEIC 단어 카드</span>
         <h1 className="brand">Word Pop</h1>
         <p className="mute">
-          레벨테스트로 내 수준을 확인하고, 카드를 넘기며 단어를 외워요. 모르는 카드는 곧 다시 나와요.
+          레벨 테스트로 내 수준을 확인하고,
+          <br />
+          카드를 넘기며 빠르게 단어를 암기해요.
         </p>
       </div>
       <div className="spacer" />
@@ -40,8 +42,9 @@ export default function Login({ onDemo }: { onDemo: () => void }) {
       )}
       {error && <p className="error">{error}</p>}
       <p className="mute small center-text">
-        계속하면 <a href="#/terms">이용약관</a>과 <a href="#/privacy">개인정보처리방침</a>에 동의하는
-        것으로 봅니다.
+        계속하면 <a href="#/terms">이용약관</a>과 <a href="#/privacy">개인정보처리방침</a>에
+        <br />
+        동의하는 것으로 간주합니다.
       </p>
     </main>
   )
