@@ -4,6 +4,7 @@ import { DEFAULT_PROFILE, demoStore, migrateTrialData, seedTrialProfile, supabas
 import { initAudio } from './lib/audio'
 import { ALL_LEVELS, WORD_MAP, isLevelLoaded, loadLevels } from './lib/words'
 import type { Profile, Progress, TestResult } from './lib/types'
+import { PICK_FLAG } from './lib/auth'
 import Login from './screens/Login'
 import CoursePicker from './screens/CoursePicker'
 import LevelTest from './screens/LevelTest'
@@ -65,7 +66,17 @@ function Main() {
   const [studyOpts, setStudyOpts] = useState({ newCount: 0, reviewBudget: 0 })
   const [, setTick] = useState(0)
   const [, setWv] = useState(0)
-  const [coursePicked, setCoursePicked] = useState(false) // 새 계정이 시험을 골랐는지
+  const [coursePicked, setCoursePicked] = useState(false) // 이번 접속에서 시험을 골랐는지
+  // 방금 '구글로 계속하기'로 로그인해서 돌아왔는지: 표시는 한 번 읽고 바로 지운다
+  const [loginPick, setLoginPick] = useState(() => {
+    try {
+      const v = localStorage.getItem(PICK_FLAG) === '1'
+      localStorage.removeItem(PICK_FLAG)
+      return v
+    } catch {
+      return false
+    }
+  })
   const trialStart = useRef(false) // '체험하기'로 막 들어왔는지(바로 학습 화면으로 보낼 때 사용)
 
   useEffect(() => {
@@ -221,9 +232,21 @@ function Main() {
     setScreen('home')
   }
 
+  // 새 계정이거나 방금 로그인했다면 시험 선택부터 (체험 모드는 제외)
+  const untested = !profile.tested || profile.level == null
+  if (!coursePicked && (untested || (loginPick && !store.demo))) {
+    return (
+      <CoursePicker
+        onPick={() => {
+          setCoursePicked(true)
+          setLoginPick(false)
+        }}
+      />
+    )
+  }
+
   // 처음이면 레벨 테스트부터
-  if (!profile.tested || profile.level == null) {
-    if (!coursePicked) return <CoursePicker onPick={() => setCoursePicked(true)} />
+  if (untested) {
     return <LevelTest autoAudio={profile.autoAudio} onFinish={finishTest} />
   }
 
