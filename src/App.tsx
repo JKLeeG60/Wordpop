@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { configured, supabase } from './supabase'
-import { DEFAULT_PROFILE, demoStore, supabaseStore } from './lib/store'
+import { DEFAULT_PROFILE, demoStore, migrateTrialData, seedTrialProfile, supabaseStore } from './lib/store'
 import { initAudio } from './lib/audio'
 import { ALL_LEVELS, WORD_MAP, isLevelLoaded, loadLevels } from './lib/words'
 import type { Profile, Progress, TestResult } from './lib/types'
@@ -18,6 +18,13 @@ const getDemo = () => {
     return localStorage.getItem('wp_demo_user')
   } catch {
     return null
+  }
+}
+const clearDemoFlag = () => {
+  try {
+    localStorage.removeItem('wp_demo_user')
+  } catch {
+    /* ignore */
   }
 }
 const setDemo = () => {
@@ -57,6 +64,7 @@ function Main() {
   const [studyOpts, setStudyOpts] = useState({ newCount: 0, reviewBudget: 0 })
   const [, setTick] = useState(0)
   const [, setWv] = useState(0)
+  const trialStart = useRef(false) // '체험하기'로 막 들어왔는지(바로 학습 화면으로 보낼 때 사용)
 
   useEffect(() => {
     initAudio()
@@ -65,7 +73,10 @@ function Main() {
   useEffect(() => {
     if (!configured) return
     // 체험 모드('demo')는 로그인 상태 확인이 덮어쓰지 않는다
-    const apply = (id: string | null) => setUserId((prev) => id ?? (prev === 'demo' ? prev : null))
+    const apply = (id: string | null) => {
+      if (id) clearDemoFlag() // 로그인되면 체험 표시를 끈다(체험 기록은 아래에서 계정으로 옮김)
+      setUserId((prev) => id ?? (prev === 'demo' ? prev : null))
+    }
     supabase.auth.getSession().then(({ data }) => {
       apply(data.session?.user.id ?? null)
       setAuthReady(true)
@@ -98,11 +109,24 @@ function Main() {
       return
     }
     let alive = true
-    Promise.all([store.getProfile(), store.getProgress()])
+    const load = async () => {
+      // 로그인한 계정이면, 체험 중 쌓은 기록을 먼저 옮긴다 (실패하면 다음에 다시 시도)
+      if (!store.demo) await migrateTrialData(store).catch(() => undefined)
+      return Promise.all([store.getProfile(), store.getProgress()])
+    }
+    load()
       .then(([p, list]) => {
         if (!alive) return
         setProfile(p)
         setProgress(new Map(list.map((x) => [x.wordId, x])))
+        // 체험하기로 처음 들어왔으면 레벨 테스트 없이 바로 새 단어 10개 학습
+        if (trialStart.current) {
+          trialStart.current = false
+          if (p.tested && p.level && list.length === 0) {
+            setStudyOpts({ newCount: 10, reviewBudget: 0 })
+            setScreen('study')
+          }
+        }
       })
       .catch((e) => alive && setLoadErr(e instanceof Error ? e.message : '불러오지 못했어요'))
     return () => {
@@ -139,6 +163,10 @@ function Main() {
     return (
       <Login
         onDemo={() => {
+          if (configured) {
+            seedTrialProfile()
+            trialStart.current = true
+          }
           setDemo()
           setUserId('demo')
         }}
@@ -205,6 +233,7 @@ function Main() {
     return (
       <Study
         store={store}
+        trial={configured && store.demo}
         profile={profile}
         initial={[...progress.values()]}
         newCount={studyOpts.newCount}

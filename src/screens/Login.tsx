@@ -1,16 +1,14 @@
 import { useState } from 'react'
-import { configured, supabase } from '../supabase'
+import { configured } from '../supabase'
+import { signInWithGoogle } from '../lib/auth'
 
 export default function Login({ onDemo }: { onDemo: () => void }) {
   const [error, setError] = useState('')
 
   async function google() {
     setError('')
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: window.location.origin },
-    })
-    if (error) setError(error.message)
+    const msg = await signInWithGoogle()
+    if (msg) setError(msg)
   }
 
   return (

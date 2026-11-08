@@ -456,6 +456,37 @@ h3 {
   padding: 22px 18px 28px;
 }
 
+/* 체험 중 로그인 안내: 아래에서 부드럽게 올라온다 */
+.modal.soft {
+  animation: fade-in 0.3s ease-out;
+}
+.sheet.soft {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  animation: sheet-up 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.sheet.soft p {
+  margin: 0 0 6px;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 /* 설정 */
 .seg {
   display: flex;

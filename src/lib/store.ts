@@ -221,3 +221,65 @@ export function demoStore(onSignOut: () => void): Store {
     },
   }
 }
+
+/* ---------------- 체험 모드 → 계정 ---------------- */
+
+const TRIAL_LEVEL = 3 // 체험 시작 난이도(500~700점)
+
+// 체험 시작: 레벨 테스트 없이 바로 학습하도록 기본 레벨을 정해 둔다
+export function seedTrialProfile() {
+  const cur = read<Partial<Profile>>(K.profile, {})
+  if (cur.tested && cur.level) return
+  write(K.profile, { ...cur, level: TRIAL_LEVEL, tested: true })
+}
+
+function clearTrialData() {
+  try {
+    Object.values(K).forEach((k) => localStorage.removeItem(k))
+    ;['wp_demo_offset_days', 'wp_demo_user', 'wp_test_draft'].forEach((k) => localStorage.removeItem(k))
+  } catch {
+    /* ignore */
+  }
+}
+
+// 로그인한 계정으로 체험 중 기록을 옮긴다. 실패하면 브라우저 데이터를 남겨 다음에 다시 시도한다.
+export async function migrateTrialData(store: Store): Promise<void> {
+  const progress = read<Progress[]>(K.progress, [])
+  if (progress.length === 0) {
+    // 실제로 학습한 기록이 없으면 옮길 것이 없다(시작용 설정만 정리)
+    clearTrialData()
+    return
+  }
+  const local = read<Partial<Profile>>(K.profile, {})
+  const remote = await store.getProfile()
+  // 새 계정일 때만 체험 설정(레벨 등)을 가져오고, 기존 계정 설정은 건드리지 않는다
+  if (!remote.tested && local.tested && local.level) {
+    await store.saveProfile({
+      level: local.level,
+      tested: true,
+      dailyGoal: local.dailyGoal ?? remote.dailyGoal,
+      autoAudio: local.autoAudio ?? remote.autoAudio,
+      confirmKnow: local.confirmKnow ?? remote.confirmKnow,
+    })
+  }
+  // 같은 단어가 계정에 이미 있으면 더 최근에 수정된 쪽만 남긴다
+  const remoteMap = new Map((await store.getProgress()).map((p) => [p.wordId, p]))
+  await Promise.all(
+    progress
+      .filter((p) => {
+        const r = remoteMap.get(p.wordId)
+        return !r || r.updatedAt < p.updatedAt
+      })
+      .map((p) => store.saveProgress(p)),
+  )
+  for (const t of read<TestResult[]>(K.tests, [])) await store.saveLevelTest(t)
+  // 복습 기록(통계용)은 옮기다 실패해도 학습 기록은 이미 안전하므로 무시한다
+  try {
+    for (const l of read<LogRow[]>(K.log, [])) {
+      await store.logReview({ wordId: l.wordId, known: l.known, isNew: l.isNew, responseMs: l.responseMs, reviewedAt: l.reviewedAt })
+    }
+  } catch {
+    /* ignore */
+  }
+  clearTrialData()
+}

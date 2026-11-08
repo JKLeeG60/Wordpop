@@ -11,13 +11,24 @@ import {
   type Item,
 } from '../lib/srs'
 import { speak } from '../lib/audio'
+import { signInWithGoogle } from '../lib/auth'
 import type { Store } from '../lib/store'
 import type { Profile, Progress } from '../lib/types'
 
 type Hist = { queue: Item[]; wordId: string; prev?: Progress; logP: Promise<string>; known: boolean }
 
+const PROMPT_KEY = 'wp_trial_prompt'
+const promptSeen = () => {
+  try {
+    return localStorage.getItem(PROMPT_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
 export default function Study({
   store,
+  trial,
   profile,
   initial,
   newCount,
@@ -26,6 +37,7 @@ export default function Study({
   onExit,
 }: {
   store: Store
+  trial: boolean // 로그인 없이 체험 중인지
   profile: Profile
   initial: Progress[]
   newCount: number
@@ -50,6 +62,51 @@ export default function Study({
   const [drag, setDrag] = useState<{ x: number; y: number } | null>(null)
   const [err, setErr] = useState('')
   const startPt = useRef<{ x: number; y: number } | null>(null)
+  const [showLogin, setShowLogin] = useState(false)
+  const [loginErr, setLoginErr] = useState('')
+  const promptDone = useRef(promptSeen())
+
+  // 체험 중 서로 다른 카드 10장을 한 번씩 넘기면 로그인 안내를 한 번만 띄운다
+  useEffect(() => {
+    if (!trial || promptDone.current) return
+    if (new Set(hist.map((h) => h.wordId)).size >= 10) {
+      promptDone.current = true
+      try {
+        localStorage.setItem(PROMPT_KEY, '1')
+      } catch {
+        /* ignore */
+      }
+      setShowLogin(true)
+    }
+  }, [hist.length]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const loginSheet = showLogin && (
+    <div className="modal soft" onClick={() => setShowLogin(false)}>
+      <div className="sheet soft center-text" onClick={(e) => e.stopPropagation()} role="dialog" aria-label="로그인 안내">
+        <div className="big-emoji">🎉</div>
+        <h2 className="m0">10개 완료!</h2>
+        <p className="mute">
+          로그인하면 지금까지의 학습 기록이 저장되고,
+          <br />
+          복습 일정도 다른 기기에서 이어갈 수 있어요.
+        </p>
+        <button
+          className="btn primary block"
+          onClick={async () => {
+            setLoginErr('')
+            const msg = await signInWithGoogle()
+            if (msg) setLoginErr(msg)
+          }}
+        >
+          Google로 계속하기
+        </button>
+        {loginErr && <p className="error">{loginErr}</p>}
+        <button className="btn ghost block" onClick={() => setShowLogin(false)}>
+          나중에 할게요
+        </button>
+      </div>
+    </div>
+  )
 
   const persist = (fn: () => Promise<unknown>) => {
     chain.current = chain.current
@@ -209,6 +266,7 @@ export default function Study({
         <button className="btn ghost block" onClick={exit}>
           홈으로
         </button>
+        {loginSheet}
       </main>
     )
   }
@@ -351,6 +409,7 @@ export default function Study({
           </div>
         </div>
       )}
+      {loginSheet}
     </main>
   )
 }
