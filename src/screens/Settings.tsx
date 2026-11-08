@@ -8,14 +8,14 @@ import type { Profile } from '../lib/types'
 export default function Settings({
   profile,
   store,
-  onChange,
+  onSave,
   onRetest,
   onBack,
   onClock,
 }: {
   profile: Profile
   store: Store
-  onChange: (p: Partial<Profile>) => void
+  onSave: (p: Partial<Profile>) => Promise<void>
   onRetest: () => void
   onBack: () => void
   onClock: () => void
@@ -23,6 +23,45 @@ export default function Settings({
   const [confirmDel, setConfirmDel] = useState(false)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
+  const [shareMsg, setShareMsg] = useState('')
+  // 저장을 누르기 전까지는 화면 안의 임시 값으로만 들고 있는다
+  const [draft, setDraft] = useState<Partial<Profile>>({})
+  const [saving, setSaving] = useState(false)
+  const cur = { ...profile, ...draft }
+  const dirty = (Object.keys(draft) as (keyof Profile)[]).some((k) => draft[k] !== profile[k])
+  const onChange = (p: Partial<Profile>) => setDraft((d) => ({ ...d, ...p }))
+
+  async function save() {
+    setSaving(true)
+    setError('')
+    try {
+      await onSave(draft)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : '저장에 실패했어요')
+      setSaving(false)
+    }
+  }
+
+  // 친구 초대: 폰의 공유 창(카카오톡·문자·복사 등)을 열고, 안 되면 링크를 복사
+  async function invite() {
+    const data = {
+      title: 'Word Pop',
+      text: 'Word Pop - 레벨 테스트로 내 수준을 확인하고, 카드를 넘기며 빠르게 토익 단어를 암기해요!',
+      url: window.location.origin,
+    }
+    setShareMsg('')
+    try {
+      if (navigator.share) {
+        await navigator.share(data)
+        return
+      }
+      await navigator.clipboard.writeText(`${data.text}\n${data.url}`)
+      setShareMsg('링크가 복사됐어요. 친구에게 붙여넣어 보내 주세요.')
+    } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') return // 사용자가 공유 창을 닫음
+      setShareMsg(`복사에 실패했어요. 주소를 직접 알려 주세요: ${data.url}`)
+    }
+  }
 
   async function remove() {
     setBusy(true)
@@ -43,7 +82,9 @@ export default function Settings({
           ← 뒤로
         </button>
         <h2 className="m0">설정</h2>
-        <span style={{ width: 40 }} />
+        <button className="link strong" onClick={save} disabled={!dirty || saving}>
+          {saving ? '저장 중…' : '저장'}
+        </button>
       </div>
 
       <h3 className="sec">하루 새 단어 목표</h3>
@@ -51,7 +92,7 @@ export default function Settings({
         {[5, 10, 20].map((n) => (
           <button
             key={n}
-            className={profile.dailyGoal === n ? 'on' : ''}
+            className={cur.dailyGoal === n ? 'on' : ''}
             onClick={() => onChange({ dailyGoal: n })}
           >
             {n}개
@@ -64,7 +105,7 @@ export default function Settings({
         {[1, 2, 3, 4].map((lv) => (
           <button
             key={lv}
-            className={profile.level === lv ? 'on' : ''}
+            className={cur.level === lv ? 'on' : ''}
             onClick={() => onChange({ level: lv })}
           >
             {LEVEL_NAMES[lv]}
@@ -80,7 +121,7 @@ export default function Settings({
         <span>카드가 나오면 발음 자동 재생</span>
         <input
           type="checkbox"
-          checked={profile.autoAudio}
+          checked={cur.autoAudio}
           onChange={(e) => onChange({ autoAudio: e.target.checked })}
         />
       </label>
@@ -92,7 +133,7 @@ export default function Settings({
         </span>
         <input
           type="checkbox"
-          checked={profile.confirmKnow}
+          checked={cur.confirmKnow}
           onChange={(e) => onChange({ confirmKnow: e.target.checked })}
         />
       </label>
@@ -131,6 +172,10 @@ export default function Settings({
       <button className="btn block" onClick={() => store.signOut()}>
         로그아웃
       </button>
+      <button className="btn block mt" onClick={invite}>
+        친구 초대
+      </button>
+      {shareMsg && <p className="mute small">{shareMsg}</p>}
       {!confirmDel ? (
         <button className="btn danger block mt" onClick={() => setConfirmDel(true)}>
           계정 삭제

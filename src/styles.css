@@ -170,6 +170,13 @@ h3 {
   cursor: pointer;
   padding: 6px 0;
 }
+.link.strong {
+  font-weight: 700;
+}
+.link:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
 .icon-btn {
   font-size: 22px;
   width: 46px;

@@ -173,10 +173,12 @@ function Main() {
     await loadLevels([level])
     patchProfile({ level })
   }
-  const onSettingsChange = (patch: Partial<Profile>) => {
+  // 설정 화면에서 '저장'을 눌렀을 때만 호출된다
+  const onSettingsSave = async (patch: Partial<Profile>) => {
     const { level, ...rest } = patch
-    if (level != null) changeLevel(level).catch(() => setLoadErr('단어를 불러오지 못했어요.'))
+    if (level != null) await changeLevel(level)
     if (Object.keys(rest).length) patchProfile(rest)
+    setScreen('home')
   }
 
   async function finishTest(level: number, result: TestResult) {
@@ -219,7 +221,7 @@ function Main() {
       <Settings
         profile={profile}
         store={store}
-        onChange={onSettingsChange}
+        onSave={onSettingsSave}
         onRetest={() => {
           try {
             localStorage.removeItem('wp_test_draft')
