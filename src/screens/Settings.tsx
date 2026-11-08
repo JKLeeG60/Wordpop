@@ -3,6 +3,7 @@ import { LEVEL_NAMES } from '../lib/words'
 import { addOffsetDays, getOffset, resetOffset } from '../lib/clock'
 import { audioSupported } from '../lib/audio'
 import { configured } from '../supabase'
+import { signInWithGoogle } from '../lib/auth'
 import type { Store } from '../lib/store'
 import type { Profile } from '../lib/types'
 
@@ -25,6 +26,7 @@ export default function Settings({
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [shareMsg, setShareMsg] = useState('')
+  const trial = configured && store.demo // 로그인 없이 체험 중
   // 저장을 누르기 전까지는 화면 안의 임시 값으로만 들고 있는다
   const [draft, setDraft] = useState<Partial<Profile>>({})
   const [saving, setSaving] = useState(false)
@@ -174,25 +176,45 @@ export default function Settings({
         친구 초대
       </button>
       {shareMsg && <p className="mute small">{shareMsg}</p>}
-      <button className="btn block mt" onClick={() => store.signOut()}>
-        로그 아웃
-      </button>
-      {!confirmDel ? (
-        <button className="btn danger block mt" onClick={() => setConfirmDel(true)}>
-          계정 삭제
-        </button>
+      {trial ? (
+        <>
+          <button className="btn block mt" onClick={() => store.signOut()}>
+            체험 종료
+          </button>
+          <button
+            className="btn primary block mt"
+            onClick={async () => {
+              setError('')
+              const msg = await signInWithGoogle()
+              if (msg) setError(msg)
+            }}
+          >
+            Google로 계속하기
+          </button>
+        </>
       ) : (
-        <div className="panel mt">
-          <p>계정과 모든 학습 기록이 삭제되며 되돌릴 수 없어요. 정말 삭제할까요?</p>
-          <div className="row">
-            <button className="btn grow" onClick={() => setConfirmDel(false)} disabled={busy}>
-              취소
+        <>
+          <button className="btn block mt" onClick={() => store.signOut()}>
+            로그 아웃
+          </button>
+          {!confirmDel ? (
+            <button className="btn danger block mt" onClick={() => setConfirmDel(true)}>
+              계정 삭제
             </button>
-            <button className="btn danger grow" onClick={remove} disabled={busy}>
-              {busy ? '삭제 중…' : '삭제'}
-            </button>
-          </div>
-        </div>
+          ) : (
+            <div className="panel mt">
+              <p>계정과 모든 학습 기록이 삭제되며 되돌릴 수 없어요. 정말 삭제할까요?</p>
+              <div className="row">
+                <button className="btn grow" onClick={() => setConfirmDel(false)} disabled={busy}>
+                  취소
+                </button>
+                <button className="btn danger grow" onClick={remove} disabled={busy}>
+                  {busy ? '삭제 중…' : '삭제'}
+                </button>
+              </div>
+            </div>
+          )}
+        </>
       )}
       {error && <p className="error">{error}</p>}
 
