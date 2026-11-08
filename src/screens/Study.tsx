@@ -272,6 +272,7 @@ export default function Study({
                 <span className="pos">{word.pos}</span>
                 <span className="word">{word.word}</span>
               </div>
+              {word.ipa && <div className="ipa">{word.ipa}</div>}
               <button
                 className="speak"
                 onPointerDown={(e) => e.stopPropagation()}

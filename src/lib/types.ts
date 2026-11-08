@@ -4,6 +4,7 @@ export type WordRow = {
   pos: string
   level: number // 1~4
   rank: number // 레벨 내 빈도 순위(작을수록 자주 나옴)
+  ipa?: string // 발음기호(미국식, 없는 단어도 있음)
   ex: string
   tr: Record<string, { meaning: string; ex: string }>
 }
