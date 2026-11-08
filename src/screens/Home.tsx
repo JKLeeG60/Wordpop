@@ -92,7 +92,7 @@ export default function Home({
         </button>
       </div>
 
-      {demo && <div className="banner">데모 모드 · 기록은 이 브라우저에만 저장돼요</div>}
+      {demo && <div className="banner">체험 모드 · 기록은 이 브라우저에만 저장돼요</div>}
 
       <div className="panel chart-panel mt">
         <div className="row between">

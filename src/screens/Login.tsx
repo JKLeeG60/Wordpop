@@ -27,9 +27,14 @@ export default function Login({ onDemo }: { onDemo: () => void }) {
       </div>
       <div className="spacer" />
       {configured ? (
-        <button className="btn primary block" onClick={google}>
-          Google로 계속하기
-        </button>
+        <>
+          <button className="btn block" onClick={onDemo}>
+            체험하기
+          </button>
+          <button className="btn primary block" onClick={google}>
+            Google로 계속하기
+          </button>
+        </>
       ) : (
         <>
           <button className="btn primary block" onClick={onDemo}>

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { LEVEL_NAMES } from '../lib/words'
 import { addOffsetDays, getOffset, resetOffset } from '../lib/clock'
 import { audioSupported } from '../lib/audio'
+import { configured } from '../supabase'
 import type { Store } from '../lib/store'
 import type { Profile } from '../lib/types'
 
@@ -139,7 +140,7 @@ export default function Settings({
       </label>
       {!audioSupported() && <p className="mute small">이 브라우저는 음성 재생을 지원하지 않아요.</p>}
 
-      {store.demo && (
+      {store.demo && !configured && (
         <>
           <h3 className="sec">데모 도구</h3>
           <p className="mute small">

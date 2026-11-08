@@ -47,7 +47,7 @@ export default function App() {
 
 function Main() {
   const [userId, setUserId] = useState<string | null>(() =>
-    configured ? null : getDemo(),
+    getDemo() ? 'demo' : null,
   )
   const [authReady, setAuthReady] = useState(!configured)
   const [profile, setProfile] = useState<Profile | null>(null)
@@ -64,18 +64,20 @@ function Main() {
 
   useEffect(() => {
     if (!configured) return
+    // 체험 모드('demo')는 로그인 상태 확인이 덮어쓰지 않는다
+    const apply = (id: string | null) => setUserId((prev) => id ?? (prev === 'demo' ? prev : null))
     supabase.auth.getSession().then(({ data }) => {
-      setUserId(data.session?.user.id ?? null)
+      apply(data.session?.user.id ?? null)
       setAuthReady(true)
     })
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setUserId(s?.user.id ?? null))
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => apply(s?.user.id ?? null))
     return () => sub.subscription.unsubscribe()
   }, [])
 
   const store = useMemo(
     () =>
       userId
-        ? configured
+        ? configured && userId !== 'demo'
           ? supabaseStore(userId)
           : demoStore(() => setUserId(null))
         : null,
