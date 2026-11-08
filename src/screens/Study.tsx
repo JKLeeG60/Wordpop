@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { LEVEL_NAMES, WORDS, WORD_MAP, exampleKoOf, meaningOf } from '../lib/words'
+import { WORD_MAP, courseWords, exampleKoOf, levelName, maxLevel, meaningOf } from '../lib/words'
 import { now } from '../lib/clock'
 import {
   REVIEW_CAP,
@@ -51,7 +51,7 @@ export default function Study({
   const level = profile.level ?? 1
 
   const build = (nc: number, rb: number, lv = level) =>
-    buildSession({ level: lv, words: WORDS, progress: map.current, now: now(), newCount: nc, reviewBudget: rb })
+    buildSession({ level: lv, words: courseWords(), progress: map.current, now: now(), newCount: nc, reviewBudget: rb })
 
   const [queue, setQueue] = useState<Item[]>(() => build(newCount, reviewBudget))
   const [flipped, setFlipped] = useState(false)
@@ -216,10 +216,10 @@ export default function Study({
   /* ---------- 끝 화면 ---------- */
   if (!head || !word) {
     const t = now()
-    const fresh = freshWords(level, WORDS, map.current).length
+    const fresh = freshWords(level, courseWords(), map.current).length
     const dueLeft = dueList(map.current, t).length
     const budgetLeft = Math.max(0, REVIEW_CAP - reviewedToday(map.current, t))
-    const nextLevel = level < 4 ? level + 1 : null
+    const nextLevel = level < maxLevel() ? level + 1 : null
     return (
       <main className="screen center">
         <div className="spacer" />
@@ -253,7 +253,7 @@ export default function Study({
               }
             }}
           >
-            이 레벨 단어를 모두 봤어요 → {LEVEL_NAMES[nextLevel]} 레벨로
+            이 레벨 단어를 모두 봤어요 → {levelName(nextLevel)} 레벨로
           </button>
         ) : (
           <p className="center-text mute">모든 단어를 만났어요. 복습으로 완벽하게 만들어요!</p>

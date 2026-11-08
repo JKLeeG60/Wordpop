@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LEVEL_NAMES } from '../lib/words'
+import { courseLevels, levelName } from '../lib/words'
 import { addOffsetDays, getOffset, resetOffset } from '../lib/clock'
 import { audioSupported } from '../lib/audio'
 import { configured } from '../supabase'
@@ -105,13 +105,13 @@ export default function Settings({
 
       <h3 className="sec">학습 레벨</h3>
       <div className="seg">
-        {[1, 2, 3, 4].map((lv) => (
+        {courseLevels().map((lv) => (
           <button
             key={lv}
             className={cur.level === lv ? 'on' : ''}
             onClick={() => onChange({ level: lv })}
           >
-            {LEVEL_NAMES[lv]}
+            {levelName(lv)}
           </button>
         ))}
       </div>

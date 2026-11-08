@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { configured, supabase } from './supabase'
 import { DEFAULT_PROFILE, demoStore, migrateTrialData, seedTrialProfile, supabaseStore } from './lib/store'
-import { initAudio } from './lib/audio'
-import { ALL_LEVELS, WORD_MAP, isLevelLoaded, loadLevels } from './lib/words'
+import { initAudio, setSpeechLang } from './lib/audio'
+import { WORD_MAP, courseLevels, getActiveCourse, isLevelLoaded, loadLevels, maxLevel, setActiveCourse } from './lib/words'
+import { courseOf, courseOfId, type CourseKey } from './lib/courses'
+import { readCourseLevels, writeCourseLevel, type CourseLevels } from './lib/courseState'
 import type { Profile, Progress, TestResult } from './lib/types'
 import { PICK_FLAG } from './lib/auth'
 import Login from './screens/Login'
@@ -66,6 +68,8 @@ function Main() {
   const [studyOpts, setStudyOpts] = useState({ newCount: 0, reviewBudget: 0 })
   const [, setTick] = useState(0)
   const [, setWv] = useState(0)
+  const [course, setCourse] = useState<CourseKey>(getActiveCourse) // 지금 학습 중인 언어
+  const [levels, setLevels] = useState<CourseLevels>({}) // 영어 이외 언어의 레벨(이 기기에 저장)
   const [coursePicked, setCoursePicked] = useState(false) // 이번 접속에서 시험을 골랐는지
   // 방금 '구글로 계속하기'로 로그인해서 돌아왔는지: 표시는 한 번 읽고 바로 지운다
   const [loginPick, setLoginPick] = useState(() => {
@@ -82,6 +86,9 @@ function Main() {
   useEffect(() => {
     initAudio()
   }, [])
+  useEffect(() => {
+    setSpeechLang(courseOf(course).speech)
+  }, [course])
 
   useEffect(() => {
     if (!configured) return
@@ -113,6 +120,7 @@ function Main() {
     setProgress(null)
     setLoadErr('')
     setCoursePicked(false)
+    setLevels(userId ? readCourseLevels(userId) : {})
     setScreen('home')
     if (!store) {
       try {
@@ -148,28 +156,50 @@ function Main() {
     }
   }, [store])
 
+  // 지금 언어에 맞춘 프로필: 영어는 계정 값 그대로, 다른 언어는 레벨·테스트 여부를 이 기기 값으로 덮어쓴다
+  const eff: Profile | null = useMemo(() => {
+    if (!profile) return null
+    if (course === 'en') return profile
+    const lv = levels[course]
+    return { ...profile, level: lv ?? null, tested: lv != null }
+  }, [profile, course, levels])
+  // 학습 기록은 지금 언어 단어만 골라서 화면에 넘긴다
+  const cp = useMemo(
+    () => (progress ? new Map([...progress].filter(([id]) => courseOfId(id) === course)) : null),
+    [progress, course],
+  )
+
   // 필요한 레벨의 단어 파일만 불러온다 (레벨 테스트 중엔 전체, 평소엔 현재 레벨)
-  const need = !profile ? [] : !profile.tested || profile.level == null || screen === 'test' ? ALL_LEVELS : [profile.level]
-  const hasUnknown = !!progress && [...progress.keys()].some((id) => !WORD_MAP.has(id))
-  const toLoad = [...new Set([...need, ...(hasUnknown ? ALL_LEVELS : [])])].filter((l) => !isLevelLoaded(l))
-  const allLoaded = ALL_LEVELS.every(isLevelLoaded)
-  const wordsReady = !!profile && !!progress && need.every(isLevelLoaded) && (!hasUnknown || allLoaded)
+  const lvAll = courseLevels(course)
+  const need = !eff ? [] : !eff.tested || eff.level == null || screen === 'test' ? lvAll : [eff.level]
+  const hasUnknown = !!cp && [...cp.keys()].some((id) => !WORD_MAP.has(id))
+  const toLoad = [...new Set([...need, ...(hasUnknown ? lvAll : [])])].filter((l) => !isLevelLoaded(l, course))
+  const allLoaded = lvAll.every((l) => isLevelLoaded(l, course))
+  const wordsReady = !!eff && !!progress && need.every((l) => isLevelLoaded(l, course)) && (!hasUnknown || allLoaded)
   useEffect(() => {
     if (!toLoad.length) return
     let alive = true
-    loadLevels(toLoad)
+    loadLevels(toLoad, course)
       .then(() => alive && setWv((v) => v + 1))
       .catch(() => alive && setLoadErr('단어를 불러오지 못했어요. 네트워크를 확인해 주세요.'))
     return () => {
       alive = false
     }
-  }, [toLoad.join(',')]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [toLoad.join(','), course]) // eslint-disable-line react-hooks/exhaustive-deps
   // 지금은 없는 단어(예전 테스트 기록 등)는 목록에서 뺀다
   useEffect(() => {
     if (progress && hasUnknown && allLoaded) {
-      setProgress(new Map([...progress].filter(([id]) => WORD_MAP.has(id))))
+      setProgress(new Map([...progress].filter(([id]) => courseOfId(id) !== course || WORD_MAP.has(id))))
     }
-  }, [progress, hasUnknown, allLoaded])
+  }, [progress, hasUnknown, allLoaded, course])
+
+  // 학습할 언어를 바꾼다 (시험 선택 화면·홈의 언어 탭에서 호출)
+  const switchCourse = (c: CourseKey) => {
+    setActiveCourse(c)
+    setCourse(c)
+    setCoursePicked(true)
+    setScreen('home')
+  }
 
   if (!authReady) return <main className="screen center center-text">불러오는 중…</main>
 
@@ -177,6 +207,7 @@ function Main() {
     return (
       <Login
         onDemo={() => {
+          switchCourse('en') // 체험은 영어로 시작
           if (configured) {
             seedTrialProfile()
             trialStart.current = true
@@ -205,16 +236,24 @@ function Main() {
     )
   }
 
-  if (!profile || !progress || !wordsReady) return <main className="screen center center-text">불러오는 중…</main>
+  if (!profile || !eff || !progress || !cp || !wordsReady) return <main className="screen center center-text">불러오는 중…</main>
 
   const patchProfile = (patch: Partial<Profile>) => {
-    setProfile((p) => ({ ...(p ?? DEFAULT_PROFILE), ...patch }))
-    store.saveProfile(patch).catch((e) => setLoadErr(e instanceof Error ? e.message : '저장 실패'))
+    let p = patch
+    if (course !== 'en' && ('level' in p || 'tested' in p)) {
+      // 영어 이외 언어의 레벨은 계정이 아니라 이 기기에 저장한다
+      const { level, tested: _t, ...rest } = p // eslint-disable-line @typescript-eslint/no-unused-vars
+      if (level != null && userId) setLevels(writeCourseLevel(userId, course, level))
+      p = rest
+    }
+    if (!Object.keys(p).length) return
+    setProfile((prev) => ({ ...(prev ?? DEFAULT_PROFILE), ...p }))
+    store!.saveProfile(p).catch((e) => setLoadErr(e instanceof Error ? e.message : '저장 실패'))
   }
 
   // 레벨을 바꿀 때는 새 레벨 단어를 먼저 불러온 뒤 적용한다
   async function changeLevel(level: number) {
-    await loadLevels([level])
+    await loadLevels([level], course)
     patchProfile({ level })
   }
   // 설정 화면에서 '저장'을 눌렀을 때만 호출된다
@@ -226,19 +265,23 @@ function Main() {
   }
 
   async function finishTest(level: number, result: TestResult) {
-    await store!.saveLevelTest(result)
-    await store!.saveProfile({ level, tested: true })
-    setProfile((p) => ({ ...(p ?? DEFAULT_PROFILE), level, tested: true }))
+    if (course === 'en') {
+      await store!.saveLevelTest(result)
+      await store!.saveProfile({ level, tested: true })
+      setProfile((p) => ({ ...(p ?? DEFAULT_PROFILE), level, tested: true }))
+    } else if (userId) {
+      setLevels(writeCourseLevel(userId, course, level))
+    }
     setScreen('home')
   }
 
   // 새 계정이거나 방금 로그인했다면 시험 선택부터 (체험 모드는 제외)
-  const untested = !profile.tested || profile.level == null
+  const untested = !eff.tested || eff.level == null
   if (!coursePicked && (untested || (loginPick && !store.demo))) {
     return (
       <CoursePicker
-        onPick={() => {
-          setCoursePicked(true)
+        onPick={(c) => {
+          switchCourse(c)
           setLoginPick(false)
         }}
       />
@@ -247,12 +290,12 @@ function Main() {
 
   // 처음이면 레벨 테스트부터
   if (untested) {
-    return <LevelTest autoAudio={profile.autoAudio} onFinish={finishTest} />
+    return <LevelTest autoAudio={eff.autoAudio} onFinish={finishTest} />
   }
 
   if (screen === 'test') {
     return (
-      <LevelTest autoAudio={profile.autoAudio} onFinish={finishTest} onCancel={() => setScreen('settings')} />
+      <LevelTest autoAudio={eff.autoAudio} onFinish={finishTest} onCancel={() => setScreen('settings')} />
     )
   }
 
@@ -261,13 +304,15 @@ function Main() {
       <Study
         store={store}
         trial={configured && store.demo}
-        profile={profile}
-        initial={[...progress.values()]}
+        profile={eff}
+        initial={[...cp.values()]}
         newCount={studyOpts.newCount}
         reviewBudget={studyOpts.reviewBudget}
         onLevelUp={changeLevel}
         onExit={(list) => {
-          setProgress(new Map(list.map((x) => [x.wordId, x])))
+          // 다른 언어 기록은 그대로 두고, 지금 언어 기록만 새 값으로 바꾼다
+          const others = [...progress].filter(([id]) => courseOfId(id) !== course)
+          setProgress(new Map([...others, ...list.map((x) => [x.wordId, x] as const)]))
           setScreen('home')
         }}
       />
@@ -277,7 +322,7 @@ function Main() {
   if (screen === 'settings') {
     return (
       <Settings
-        profile={profile}
+        profile={eff}
         store={store}
         onSave={onSettingsSave}
         onRetest={() => {
@@ -296,15 +341,17 @@ function Main() {
 
   return (
     <Home
-      profile={profile}
-      progress={progress}
+      course={course}
+      onCourse={switchCourse}
+      profile={eff}
+      progress={cp}
       demo={store.demo}
       onStart={(o) => {
         setStudyOpts(o)
         setScreen('study')
       }}
       onSettings={() => setScreen('settings')}
-      onLevelUp={() => changeLevel(Math.min(4, (profile.level ?? 1) + 1))}
+      onLevelUp={() => changeLevel(Math.min(maxLevel(course), (eff.level ?? 1) + 1))}
     />
   )
 }

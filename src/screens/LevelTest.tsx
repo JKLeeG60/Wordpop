@@ -1,20 +1,21 @@
 import { useEffect, useMemo, useState } from 'react'
-import { LEVEL_NAMES, WORDS, mainPos, meaningOf, shuffle } from '../lib/words'
+import { WORD_MAP, courseLevels, courseWords, getActiveCourse, levelName, mainPos, meaningOf, shuffle } from '../lib/words'
+import { courseOf, type CourseKey } from '../lib/courses'
 import { speak } from '../lib/audio'
 import type { TestResult, WordRow } from '../lib/types'
 
-const PER_LEVEL = 6
 const DRAFT = 'wp_test_draft'
 
 type Q = { id: string; options: string[] } // options: 단어 id 4개 (정답 포함)
-type Draft = { qs: Q[]; answers: (string | null)[] }
+type Draft = { course: CourseKey; qs: Q[]; answers: (string | null)[] }
 
 function makeQuestions(): Q[] {
   const qs: Q[] = []
-  for (const level of [1, 2, 3, 4]) {
+  const WORDS = courseWords()
+  for (const level of courseLevels()) {
     const pool = WORDS.filter((w) => w.level === level)
     shuffle(pool)
-      .slice(0, PER_LEVEL)
+      .slice(0, courseOf(getActiveCourse()).perLevel)
       .forEach((w) => {
         // 같은 품사 + 비슷한 난이도에서 오답 보기를 고르고, 부족하면 같은 레벨 전체에서 채운다
         const same = shuffle(WORDS.filter((x) => x.id !== w.id && mainPos(x) === mainPos(w) && Math.abs(x.level - w.level) <= 1))
@@ -32,30 +33,36 @@ function makeQuestions(): Q[] {
 }
 
 function loadDraft(): Draft {
+  const course = getActiveCourse()
   try {
     const raw = localStorage.getItem(DRAFT)
     if (raw) {
-      const d = JSON.parse(raw) as Draft
-      if (d.qs?.length === 4 * PER_LEVEL) return d
+      const d = JSON.parse(raw) as Partial<Draft>
+      // 같은 언어로 보던 시험만 이어서 본다 (예전 영어 기록은 course가 없어서 영어로 본다)
+      if ((d.course ?? 'en') === course && d.qs?.length === courseLevels().length * courseOf(course).perLevel) {
+        return { course, qs: d.qs, answers: d.answers ?? d.qs.map(() => null) }
+      }
     }
   } catch {
     /* ignore */
   }
   const qs = makeQuestions()
-  return { qs, answers: qs.map(() => null) }
+  return { course, qs, answers: qs.map(() => null) }
 }
 
-const wordById = (id: string) => WORDS.find((w) => w.id === id)!
+const wordById = (id: string) => WORD_MAP.get(id)!
 
 export function scoreTest(d: Draft): TestResult {
-  const scores: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0 }
+  const levels = courseLevels()
+  const scores: Record<number, number> = Object.fromEntries(levels.map((lv) => [lv, 0]))
   d.qs.forEach((q, i) => {
     if (d.answers[i] === q.id) scores[wordById(q.id).level]++
   })
-  // 낮은 구간부터 보다가 정답이 처음으로 5개 미만인 구간에서 시작. 모두 5개 이상이면 700~990.
-  let level = 4
-  for (const lv of [1, 2, 3, 4]) {
-    if (scores[lv] < 5) {
+  // 낮은 구간부터 보다가 정답이 처음으로 기준(영어 6문제 중 5개 등) 미만인 구간에서 시작. 모두 넘으면 가장 어려운 구간.
+  const pass = courseOf(getActiveCourse()).pass
+  let level = levels[levels.length - 1]
+  for (const lv of levels) {
+    if (scores[lv] < pass) {
       level = lv
       break
     }
@@ -80,6 +87,9 @@ export default function LevelTest({
   const idx = draft.answers.findIndex((a) => a === null)
   const done = idx === -1
   const total = draft.qs.length
+  const cfg = courseOf(draft.course)
+  const levels = courseLevels(draft.course)
+  const topLevel = levels[levels.length - 1]
 
   useEffect(() => {
     try {
@@ -124,7 +134,7 @@ export default function LevelTest({
   function retake() {
     const qs = makeQuestions()
     setChoice(null)
-    setDraft({ qs, answers: qs.map(() => null) })
+    setDraft({ course: draft.course, qs, answers: qs.map(() => null) })
   }
 
   if (done && result) {
@@ -132,22 +142,24 @@ export default function LevelTest({
     return (
       <main className="screen">
         <h1>테스트 결과</h1>
-        <p className="mute">구간별로 6문제 중 맞힌 개수예요.</p>
+        <p className="mute">구간별로 {cfg.perLevel}문제 중 맞힌 개수예요.</p>
         <div className="panel">
-          {[1, 2, 3, 4].map((lv) => (
+          {levels.map((lv) => (
             <div className="score-row" key={lv}>
-              <span>{LEVEL_NAMES[lv]}</span>
+              <span>{levelName(lv, draft.course)}</span>
               <div className="bar">
-                <i style={{ width: `${(result.scores[lv] / PER_LEVEL) * 100}%` }} />
+                <i style={{ width: `${(result.scores[lv] / cfg.perLevel) * 100}%` }} />
               </div>
-              <b>{result.scores[lv]}/6</b>
+              <b>
+                {result.scores[lv]}/{cfg.perLevel}
+              </b>
             </div>
           ))}
         </div>
         <div className="panel mt">
           <p className="mute small">추천 시작 레벨</p>
-          <div className="level-title">{LEVEL_NAMES[result.resultLevel]}</div>
-          {result.resultLevel === 4 && result.scores[4] >= 5 && (
+          <div className="level-title">{levelName(result.resultLevel, draft.course)}</div>
+          {result.resultLevel === topLevel && result.scores[topLevel] >= cfg.pass && (
             <p className="mute small">모든 구간을 잘 풀었어요. 가장 어려운 구간에서 시작해요.</p>
           )}
           <p className="mute small">직접 바꿔도 좋아요. 본인 판단이 더 정확할 때가 많아요.</p>
@@ -155,16 +167,16 @@ export default function LevelTest({
             <button className="btn grow" disabled={level <= 1} onClick={() => setChoice(level - 1)}>
               ← 한 단계 쉽게
             </button>
-            <button className="btn grow" disabled={level >= 4} onClick={() => setChoice(level + 1)}>
+            <button className="btn grow" disabled={level >= topLevel} onClick={() => setChoice(level + 1)}>
               한 단계 어렵게 →
             </button>
           </div>
           <p className="center-text mt">
-            선택한 레벨 <b>{LEVEL_NAMES[level]}</b>
+            선택한 레벨 <b>{levelName(level, draft.course)}</b>
           </p>
         </div>
         <p className="mute small mt">
-          * 점수대 구분은 실제 토익 점수가 아니라 단어 난이도를 추정한 값이에요.
+          {cfg.note}
         </p>
         {error && <p className="error">{error}</p>}
         <div className="spacer" />

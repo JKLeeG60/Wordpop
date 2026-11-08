@@ -2,9 +2,9 @@ export type WordRow = {
   id: string
   word: string
   pos: string
-  level: number // 1~4
+  level: number // 1부터 (언어마다 레벨 수가 다르다)
   rank: number // 레벨 내 빈도 순위(작을수록 자주 나옴)
-  ipa?: string // 발음기호(미국식, 없는 단어도 있음)
+  ipa?: string // 읽는 법: 영어·스페인어는 발음기호, 중국어는 병음, 일본어는 히라가나
   ex: string
   tr: Record<string, { meaning: string; ex: string }>
 }

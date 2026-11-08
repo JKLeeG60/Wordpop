@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { LEVEL_NAMES, WORDS, wordsOfLevel } from '../lib/words'
+import { courseWords, levelName, maxLevel, wordsOfLevel } from '../lib/words'
 import { now } from '../lib/clock'
 import {
   REVIEW_CAP,
@@ -11,10 +11,12 @@ import {
   reviewedToday,
   streakDays,
 } from '../lib/srs'
-import { COURSES, type CourseKey } from '../lib/courses'
+import { COURSES, courseOf, type CourseKey } from '../lib/courses'
 import type { Profile, Progress } from '../lib/types'
 
 export default function Home({
+  course,
+  onCourse,
   profile,
   progress,
   demo,
@@ -22,6 +24,8 @@ export default function Home({
   onSettings,
   onLevelUp,
 }: {
+  course: CourseKey
+  onCourse: (c: CourseKey) => void
   profile: Profile
   progress: Map<string, Progress>
   demo: boolean
@@ -29,8 +33,7 @@ export default function Home({
   onSettings: () => void
   onLevelUp: () => void
 }) {
-  const [course, setCourse] = useState<CourseKey>('en')
-  const cur = COURSES.find((c) => c.key === course) ?? COURSES[0]
+  const cur = courseOf(course)
   const t = now()
   const level = profile.level ?? 1
   const all = [...progress.values()]
@@ -40,7 +43,7 @@ export default function Home({
   const levelWords = wordsOfLevel(level)
   const mastered = levelWords.filter((w) => (progress.get(w.id)?.box ?? 0) >= 3).length
   const pct = levelWords.length ? Math.round((mastered / levelWords.length) * 100) : 0
-  const fresh = freshWords(level, WORDS, progress).length
+  const fresh = freshWords(level, courseWords(), progress).length
   const doneNew = newToday(progress, t)
   const goal = profile.dailyGoal
   const goalPct = Math.min(100, Math.round((doneNew / goal) * 100))
@@ -98,7 +101,7 @@ export default function Home({
             key={c.key}
             className={`tab ${c.key === course ? 'on' : ''}`}
             aria-pressed={c.key === course}
-            onClick={() => setCourse(c.key)}
+            onClick={() => onCourse(c.key)}
           >
             <span className="tab-name">{c.name}</span>
             <span className="tab-exam">{c.exam.replace(' · ', '·')}</span>
@@ -124,7 +127,7 @@ export default function Home({
       ) : (
         <>
       <div className="mt">
-        <span className="chip">레벨 {LEVEL_NAMES[level]}</span>
+        <span className="chip">레벨 {levelName(level)}</span>
       </div>
 
       <div className="panel chart-panel mt">
@@ -182,7 +185,7 @@ export default function Home({
 
       <div className="panel mt">
         <div className="row between">
-          <span>레벨 {LEVEL_NAMES[level]} 진도</span>
+          <span>레벨 {levelName(level)} 진도</span>
           <b>{pct}%</b>
         </div>
         <div className="bar mt">
@@ -191,9 +194,9 @@ export default function Home({
         <p className="mute small">
           {mastered} / {levelWords.length}개 익힘 (복습 3단계 이상)
         </p>
-        {pct >= 80 && level < 4 && (
+        {pct >= 80 && level < maxLevel() && (
           <button className="btn block mt" onClick={onLevelUp}>
-            🎉 다음 레벨({LEVEL_NAMES[level + 1]})로 올라갈까요?
+            🎉 다음 레벨({levelName(level + 1)})로 올라갈까요?
           </button>
         )}
       </div>

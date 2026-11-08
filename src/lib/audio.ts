@@ -1,4 +1,4 @@
-// 미국식 영어 발음 재생 (브라우저 내장 음성 합성).
+// 발음 재생 (영어는 미국식) (브라우저 내장 음성 합성).
 // 나중에 사전 녹음 mp3나 클라우드 TTS로 바꿀 수 있게 재생 로직은 이 파일에만 둔다.
 
 const PREFERRED = [
@@ -13,6 +13,7 @@ const PREFERRED = [
 ]
 
 let cached: SpeechSynthesisVoice | null = null
+let lang = 'en-US' // 지금 읽어 줄 언어 (학습 언어를 바꾸면 setSpeechLang으로 바꾼다)
 
 export const audioSupported = () => typeof window !== 'undefined' && 'speechSynthesis' in window
 
@@ -20,6 +21,11 @@ function pickVoice(): SpeechSynthesisVoice | null {
   if (!audioSupported()) return null
   const list = window.speechSynthesis.getVoices()
   if (!list.length) return null
+  if (lang !== 'en-US') {
+    // 영어 외 언어: 같은 지역 음성을 먼저, 없으면 같은 언어의 아무 음성
+    const norm = (v: SpeechSynthesisVoice) => v.lang.replace('_', '-').toLowerCase()
+    return list.find((v) => norm(v) === lang.toLowerCase()) ?? list.find((v) => norm(v).startsWith(lang.slice(0, 2))) ?? null
+  }
   const us = list.filter((v) => v.lang.replace('_', '-').toLowerCase() === 'en-us')
   for (const name of PREFERRED) {
     const v = us.find((x) => x.name.includes(name))
@@ -37,6 +43,11 @@ export function initAudio() {
   window.speechSynthesis.addEventListener?.('voiceschanged', load)
 }
 
+export function setSpeechLang(next: string) {
+  lang = next
+  cached = pickVoice()
+}
+
 let timer: number | undefined
 
 export function speak(text: string, rate = 0.9) {
@@ -47,7 +58,7 @@ export function speak(text: string, rate = 0.9) {
   // cancel 직후 바로 speak 하면 일부 브라우저(iOS)에서 무시되어 짧게 지연한다.
   timer = window.setTimeout(() => {
     const u = new SpeechSynthesisUtterance(text)
-    u.lang = 'en-US'
+    u.lang = lang
     u.rate = rate
     const v = cached ?? pickVoice()
     if (v) u.voice = v
