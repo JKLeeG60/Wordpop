@@ -11,6 +11,7 @@ import {
   reviewedToday,
   streakDays,
 } from '../lib/srs'
+import { COURSES, type CourseKey } from '../lib/courses'
 import type { Profile, Progress } from '../lib/types'
 
 export default function Home({
@@ -28,6 +29,8 @@ export default function Home({
   onSettings: () => void
   onLevelUp: () => void
 }) {
+  const [course, setCourse] = useState<CourseKey>('en')
+  const cur = COURSES.find((c) => c.key === course) ?? COURSES[0]
   const t = now()
   const level = profile.level ?? 1
   const all = [...progress.values()]
@@ -58,7 +61,7 @@ export default function Home({
     const ro = new ResizeObserver(() => setSize({ w: el.clientWidth, h: el.clientHeight }))
     ro.observe(el)
     return () => ro.disconnect()
-  }, [])
+  }, [course]) // 탭을 바꿔 그래프가 다시 나타나면 크기를 다시 잰다
   const { w: W, h: H } = size
   const TOP = 26
   const BOTTOM = 22
@@ -83,16 +86,46 @@ export default function Home({
   return (
     <main className="screen home">
       <div className="row between">
-        <div>
-          <div className="brand sm">Word Pop</div>
-          <span className="chip">레벨 {LEVEL_NAMES[level]}</span>
-        </div>
+        <div className="brand sm">Word Pop</div>
         <button className="icon-btn" onClick={onSettings} aria-label="설정">
           ⚙️
         </button>
       </div>
 
+      <div className="tabs4 mt" role="group" aria-label="학습할 시험">
+        {COURSES.map((c) => (
+          <button
+            key={c.key}
+            className={`tab ${c.key === course ? 'on' : ''}`}
+            aria-pressed={c.key === course}
+            onClick={() => setCourse(c.key)}
+          >
+            <span className="tab-name">{c.name}</span>
+            <span className="tab-exam">{c.exam.replace(' · ', '·')}</span>
+          </button>
+        ))}
+      </div>
+
       {demo && <div className="banner">체험 모드 · 기록은 이 브라우저에만 저장돼요</div>}
+
+      {!cur.ready ? (
+        <div className="panel soon-panel mt">
+          <span className="course-glyph soon big">{cur.glyph}</span>
+          <h2 className="m0">
+            {cur.name} · {cur.exam}
+          </h2>
+          <span className="soon-pill">준비 중</span>
+          <p className="mute m0">
+            아직 열리지 않았어요.
+            <br />
+            열리면 이 자리에 학습 통계가 나타나요.
+          </p>
+        </div>
+      ) : (
+        <>
+      <div className="mt">
+        <span className="chip">레벨 {LEVEL_NAMES[level]}</span>
+      </div>
 
       <div className="panel chart-panel mt">
         <div className="row between">
@@ -172,6 +205,8 @@ export default function Home({
             : '이 레벨 단어를 모두 만났어요'
           : `학습 시작 · 복습 ${reviewN} · 새 단어 ${newN}`}
       </button>
+        </>
+      )}
     </main>
   )
 }

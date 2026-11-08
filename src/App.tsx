@@ -5,6 +5,7 @@ import { initAudio } from './lib/audio'
 import { ALL_LEVELS, WORD_MAP, isLevelLoaded, loadLevels } from './lib/words'
 import type { Profile, Progress, TestResult } from './lib/types'
 import Login from './screens/Login'
+import CoursePicker from './screens/CoursePicker'
 import LevelTest from './screens/LevelTest'
 import Home from './screens/Home'
 import Study from './screens/Study'
@@ -64,6 +65,7 @@ function Main() {
   const [studyOpts, setStudyOpts] = useState({ newCount: 0, reviewBudget: 0 })
   const [, setTick] = useState(0)
   const [, setWv] = useState(0)
+  const [coursePicked, setCoursePicked] = useState(false) // 새 계정이 시험을 골랐는지
   const trialStart = useRef(false) // '체험하기'로 막 들어왔는지(바로 학습 화면으로 보낼 때 사용)
 
   useEffect(() => {
@@ -99,6 +101,7 @@ function Main() {
     setProfile(null)
     setProgress(null)
     setLoadErr('')
+    setCoursePicked(false)
     setScreen('home')
     if (!store) {
       try {
@@ -220,6 +223,7 @@ function Main() {
 
   // 처음이면 레벨 테스트부터
   if (!profile.tested || profile.level == null) {
+    if (!coursePicked) return <CoursePicker onPick={() => setCoursePicked(true)} />
     return <LevelTest autoAudio={profile.autoAudio} onFinish={finishTest} />
   }
 
