@@ -169,13 +169,13 @@ export default function Settings({
       )}
 
       <h3 className="sec">계정</h3>
-      <button className="btn block" onClick={() => store.signOut()}>
-        로그아웃
-      </button>
-      <button className="btn block mt" onClick={invite}>
+      <button className="btn block" onClick={invite}>
         친구 초대
       </button>
       {shareMsg && <p className="mute small">{shareMsg}</p>}
+      <button className="btn block mt" onClick={() => store.signOut()}>
+        로그 아웃
+      </button>
       {!confirmDel ? (
         <button className="btn danger block mt" onClick={() => setConfirmDel(true)}>
           계정 삭제
