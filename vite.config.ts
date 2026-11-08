@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: {
         name: 'Word Pop',
         short_name: 'Word Pop',
-        description: '토익 단어 카드',
+        description: '영어·중국어·일본어·스페인어 단어 카드',
         lang: 'ko',
         start_url: '/',
         scope: '/',

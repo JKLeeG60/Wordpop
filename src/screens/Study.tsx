@@ -260,7 +260,7 @@ export default function Study({
         )}
         {hist.length > 0 && (
           <button className="btn ghost block" onClick={undo}>
-            ↶ 마지막 카드 되돌리기
+            ↶ 이전 카드로 되돌리기
           </button>
         )}
         <button className="btn ghost block" onClick={exit}>
@@ -385,7 +385,7 @@ export default function Study({
           알아요 ↑
         </button>
       </div>
-      <p className="mute small center-text keys">위로 밀기 = 알아요 · 좌우로 밀기 = 몰라요 · Space 뒤집기 · Z 되돌리기</p>
+      <p className="mute small center-text keys">위로 밀기 = 알아요 · 좌우로 밀기 = 몰라요<br />Space 뒤집기 · Z 이전</p>
 
       {confirm && (
         <div className="modal" onClick={() => setConfirm(false)}>

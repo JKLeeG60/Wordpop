@@ -15,7 +15,7 @@ export default function Login({ onDemo }: { onDemo: () => void }) {
     <main className="screen center">
       <div className="spacer" />
       <div className="pop-in center-text">
-        <span className="chip">TOEIC 단어 카드</span>
+        <span className="chip">영어 · 중국어 · 일본어 · 스페인어 단어 카드</span>
         <h1 className="brand">Word Pop</h1>
         <p className="mute">
           레벨 테스트로 내 수준을 확인하고,

@@ -49,7 +49,7 @@ export default function Settings({
   async function invite() {
     const data = {
       title: 'Word Pop',
-      text: 'Word Pop - 레벨 테스트로 내 수준을 확인하고, 카드를 넘기며 빠르게 토익 단어를 암기해요!',
+      text: 'Word Pop - 레벨 테스트로 내 수준을 확인하고, 카드를 넘기며 빠르게 영어·중국어·일본어·스페인어 단어를 암기해요!',
       url: window.location.origin,
     }
     setShareMsg('')
