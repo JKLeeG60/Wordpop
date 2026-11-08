@@ -1,0 +1,2802 @@
+[
+ {
+  "id": "schedule",
+  "word": "schedule",
+  "pos": "n.",
+  "level": 1,
+  "rank": 1,
+  "ex": "Please check the schedule for tomorrow.",
+  "tr": {
+   "ko": {
+    "meaning": "일정, 시간표",
+    "ex": "내일 일정을 확인해 주세요."
+   }
+  }
+ },
+ {
+  "id": "meeting",
+  "word": "meeting",
+  "pos": "n.",
+  "level": 1,
+  "rank": 2,
+  "ex": "The meeting starts at nine.",
+  "tr": {
+   "ko": {
+    "meaning": "회의",
+    "ex": "회의는 9시에 시작합니다."
+   }
+  }
+ },
+ {
+  "id": "customer",
+  "word": "customer",
+  "pos": "n.",
+  "level": 1,
+  "rank": 3,
+  "ex": "Every customer received a small gift.",
+  "tr": {
+   "ko": {
+    "meaning": "고객",
+    "ex": "모든 고객이 작은 선물을 받았습니다."
+   }
+  }
+ },
+ {
+  "id": "manager",
+  "word": "manager",
+  "pos": "n.",
+  "level": 1,
+  "rank": 4,
+  "ex": "The manager approved our plan.",
+  "tr": {
+   "ko": {
+    "meaning": "관리자, 매니저",
+    "ex": "매니저가 우리 계획을 승인했습니다."
+   }
+  }
+ },
+ {
+  "id": "order",
+  "word": "order",
+  "pos": "n./v.",
+  "level": 1,
+  "rank": 5,
+  "ex": "We placed an order yesterday.",
+  "tr": {
+   "ko": {
+    "meaning": "주문(하다)",
+    "ex": "우리는 어제 주문했습니다."
+   }
+  }
+ },
+ {
+  "id": "price",
+  "word": "price",
+  "pos": "n.",
+  "level": 1,
+  "rank": 6,
+  "ex": "The price includes free delivery.",
+  "tr": {
+   "ko": {
+    "meaning": "가격",
+    "ex": "가격에는 무료 배송이 포함됩니다."
+   }
+  }
+ },
+ {
+  "id": "report",
+  "word": "report",
+  "pos": "n.",
+  "level": 1,
+  "rank": 7,
+  "ex": "She submitted the report on time.",
+  "tr": {
+   "ko": {
+    "meaning": "보고서",
+    "ex": "그녀는 제시간에 보고서를 제출했습니다."
+   }
+  }
+ },
+ {
+  "id": "send",
+  "word": "send",
+  "pos": "v.",
+  "level": 1,
+  "rank": 8,
+  "ex": "Please send me the file today.",
+  "tr": {
+   "ko": {
+    "meaning": "보내다",
+    "ex": "오늘 파일을 보내 주세요."
+   }
+  }
+ },
+ {
+  "id": "office",
+  "word": "office",
+  "pos": "n.",
+  "level": 1,
+  "rank": 9,
+  "ex": "His office is on the third floor.",
+  "tr": {
+   "ko": {
+    "meaning": "사무실",
+    "ex": "그의 사무실은 3층에 있습니다."
+   }
+  }
+ },
+ {
+  "id": "ticket",
+  "word": "ticket",
+  "pos": "n.",
+  "level": 1,
+  "rank": 10,
+  "ex": "I bought two tickets for the show.",
+  "tr": {
+   "ko": {
+    "meaning": "표, 티켓",
+    "ex": "공연 티켓을 두 장 샀습니다."
+   }
+  }
+ },
+ {
+  "id": "company",
+  "word": "company",
+  "pos": "n.",
+  "level": 1,
+  "rank": 11,
+  "ex": "The company opened a new branch.",
+  "tr": {
+   "ko": {
+    "meaning": "회사",
+    "ex": "회사가 새 지점을 열었습니다."
+   }
+  }
+ },
+ {
+  "id": "job",
+  "word": "job",
+  "pos": "n.",
+  "level": 1,
+  "rank": 12,
+  "ex": "She is looking for a new job.",
+  "tr": {
+   "ko": {
+    "meaning": "일, 직업",
+    "ex": "그녀는 새 일자리를 찾고 있습니다."
+   }
+  }
+ },
+ {
+  "id": "market",
+  "word": "market",
+  "pos": "n.",
+  "level": 1,
+  "rank": 13,
+  "ex": "The market is growing quickly.",
+  "tr": {
+   "ko": {
+    "meaning": "시장",
+    "ex": "시장이 빠르게 성장하고 있습니다."
+   }
+  }
+ },
+ {
+  "id": "product",
+  "word": "product",
+  "pos": "n.",
+  "level": 1,
+  "rank": 14,
+  "ex": "This product is popular with students.",
+  "tr": {
+   "ko": {
+    "meaning": "제품",
+    "ex": "이 제품은 학생들에게 인기가 많습니다."
+   }
+  }
+ },
+ {
+  "id": "service",
+  "word": "service",
+  "pos": "n.",
+  "level": 1,
+  "rank": 15,
+  "ex": "Their service was fast and friendly.",
+  "tr": {
+   "ko": {
+    "meaning": "서비스",
+    "ex": "그들의 서비스는 빠르고 친절했습니다."
+   }
+  }
+ },
+ {
+  "id": "offer",
+  "word": "offer",
+  "pos": "n./v.",
+  "level": 1,
+  "rank": 16,
+  "ex": "They offered me a better position.",
+  "tr": {
+   "ko": {
+    "meaning": "제안(하다)",
+    "ex": "그들은 제게 더 좋은 직책을 제안했습니다."
+   }
+  }
+ },
+ {
+  "id": "buy",
+  "word": "buy",
+  "pos": "v.",
+  "level": 1,
+  "rank": 17,
+  "ex": "We plan to buy new computers.",
+  "tr": {
+   "ko": {
+    "meaning": "사다",
+    "ex": "우리는 새 컴퓨터를 살 계획입니다."
+   }
+  }
+ },
+ {
+  "id": "sell",
+  "word": "sell",
+  "pos": "v.",
+  "level": 1,
+  "rank": 18,
+  "ex": "The shop sells office supplies.",
+  "tr": {
+   "ko": {
+    "meaning": "팔다",
+    "ex": "그 가게는 사무용품을 팝니다."
+   }
+  }
+ },
+ {
+  "id": "pay",
+  "word": "pay",
+  "pos": "v.",
+  "level": 1,
+  "rank": 19,
+  "ex": "You can pay by credit card.",
+  "tr": {
+   "ko": {
+    "meaning": "지불하다",
+    "ex": "신용카드로 지불할 수 있습니다."
+   }
+  }
+ },
+ {
+  "id": "cost",
+  "word": "cost",
+  "pos": "n./v.",
+  "level": 1,
+  "rank": 20,
+  "ex": "The total cost was lower than expected.",
+  "tr": {
+   "ko": {
+    "meaning": "비용; (비용이) 들다",
+    "ex": "총비용이 예상보다 낮았습니다."
+   }
+  }
+ },
+ {
+  "id": "sale",
+  "word": "sale",
+  "pos": "n.",
+  "level": 1,
+  "rank": 21,
+  "ex": "The sale ends this Sunday.",
+  "tr": {
+   "ko": {
+    "meaning": "판매; 할인",
+    "ex": "할인은 이번 일요일에 끝납니다."
+   }
+  }
+ },
+ {
+  "id": "store",
+  "word": "store",
+  "pos": "n.",
+  "level": 1,
+  "rank": 22,
+  "ex": "The store closes at eight.",
+  "tr": {
+   "ko": {
+    "meaning": "가게, 매장",
+    "ex": "매장은 8시에 문을 닫습니다."
+   }
+  }
+ },
+ {
+  "id": "team",
+  "word": "team",
+  "pos": "n.",
+  "level": 1,
+  "rank": 23,
+  "ex": "Our team finished the work early.",
+  "tr": {
+   "ko": {
+    "meaning": "팀",
+    "ex": "우리 팀은 일을 일찍 끝냈습니다."
+   }
+  }
+ },
+ {
+  "id": "project",
+  "word": "project",
+  "pos": "n.",
+  "level": 1,
+  "rank": 24,
+  "ex": "The project will take three months.",
+  "tr": {
+   "ko": {
+    "meaning": "프로젝트",
+    "ex": "그 프로젝트는 3개월이 걸릴 것입니다."
+   }
+  }
+ },
+ {
+  "id": "plan",
+  "word": "plan",
+  "pos": "n./v.",
+  "level": 1,
+  "rank": 25,
+  "ex": "We need a plan for next year.",
+  "tr": {
+   "ko": {
+    "meaning": "계획(하다)",
+    "ex": "우리는 내년 계획이 필요합니다."
+   }
+  }
+ },
+ {
+  "id": "call",
+  "word": "call",
+  "pos": "n./v.",
+  "level": 1,
+  "rank": 26,
+  "ex": "Please call me after the meeting.",
+  "tr": {
+   "ko": {
+    "meaning": "전화(하다)",
+    "ex": "회의 후에 전화해 주세요."
+   }
+  }
+ },
+ {
+  "id": "message",
+  "word": "message",
+  "pos": "n.",
+  "level": 1,
+  "rank": 27,
+  "ex": "I left a message on your desk.",
+  "tr": {
+   "ko": {
+    "meaning": "메시지",
+    "ex": "책상에 메시지를 남겨 두었습니다."
+   }
+  }
+ },
+ {
+  "id": "visit",
+  "word": "visit",
+  "pos": "v.",
+  "level": 1,
+  "rank": 28,
+  "ex": "Our director will visit the factory.",
+  "tr": {
+   "ko": {
+    "meaning": "방문하다",
+    "ex": "우리 이사님이 공장을 방문할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "travel",
+  "word": "travel",
+  "pos": "v.",
+  "level": 1,
+  "rank": 29,
+  "ex": "He travels to Seoul every month.",
+  "tr": {
+   "ko": {
+    "meaning": "여행하다, 출장 가다",
+    "ex": "그는 매달 서울로 출장을 갑니다."
+   }
+  }
+ },
+ {
+  "id": "hotel",
+  "word": "hotel",
+  "pos": "n.",
+  "level": 1,
+  "rank": 30,
+  "ex": "The hotel is near the station.",
+  "tr": {
+   "ko": {
+    "meaning": "호텔",
+    "ex": "호텔은 역 근처에 있습니다."
+   }
+  }
+ },
+ {
+  "id": "flight",
+  "word": "flight",
+  "pos": "n.",
+  "level": 1,
+  "rank": 31,
+  "ex": "Our flight leaves at noon.",
+  "tr": {
+   "ko": {
+    "meaning": "항공편",
+    "ex": "우리 항공편은 정오에 출발합니다."
+   }
+  }
+ },
+ {
+  "id": "airport",
+  "word": "airport",
+  "pos": "n.",
+  "level": 1,
+  "rank": 32,
+  "ex": "A driver will meet you at the airport.",
+  "tr": {
+   "ko": {
+    "meaning": "공항",
+    "ex": "기사가 공항에서 맞이할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "station",
+  "word": "station",
+  "pos": "n.",
+  "level": 1,
+  "rank": 33,
+  "ex": "The station is five minutes away.",
+  "tr": {
+   "ko": {
+    "meaning": "역",
+    "ex": "역은 5분 거리에 있습니다."
+   }
+  }
+ },
+ {
+  "id": "meal",
+  "word": "meal",
+  "pos": "n.",
+  "level": 1,
+  "rank": 34,
+  "ex": "A meal is provided for all guests.",
+  "tr": {
+   "ko": {
+    "meaning": "식사",
+    "ex": "모든 손님께 식사가 제공됩니다."
+   }
+  }
+ },
+ {
+  "id": "client",
+  "word": "client",
+  "pos": "n.",
+  "level": 1,
+  "rank": 35,
+  "ex": "We are meeting a client at noon.",
+  "tr": {
+   "ko": {
+    "meaning": "고객, 의뢰인",
+    "ex": "우리는 정오에 고객을 만납니다."
+   }
+  }
+ },
+ {
+  "id": "staff",
+  "word": "staff",
+  "pos": "n.",
+  "level": 1,
+  "rank": 36,
+  "ex": "The staff received new uniforms.",
+  "tr": {
+   "ko": {
+    "meaning": "직원들",
+    "ex": "직원들이 새 유니폼을 받았습니다."
+   }
+  }
+ },
+ {
+  "id": "member",
+  "word": "member",
+  "pos": "n.",
+  "level": 1,
+  "rank": 37,
+  "ex": "Members can enter the gym for free.",
+  "tr": {
+   "ko": {
+    "meaning": "회원",
+    "ex": "회원은 헬스장을 무료로 이용할 수 있습니다."
+   }
+  }
+ },
+ {
+  "id": "form",
+  "word": "form",
+  "pos": "n.",
+  "level": 1,
+  "rank": 38,
+  "ex": "Please fill out this form.",
+  "tr": {
+   "ko": {
+    "meaning": "양식",
+    "ex": "이 양식을 작성해 주세요."
+   }
+  }
+ },
+ {
+  "id": "copy",
+  "word": "copy",
+  "pos": "n./v.",
+  "level": 1,
+  "rank": 39,
+  "ex": "Make a copy of the contract.",
+  "tr": {
+   "ko": {
+    "meaning": "사본; 복사하다",
+    "ex": "계약서 사본을 만들어 주세요."
+   }
+  }
+ },
+ {
+  "id": "file",
+  "word": "file",
+  "pos": "n.",
+  "level": 1,
+  "rank": 40,
+  "ex": "The file is saved on my computer.",
+  "tr": {
+   "ko": {
+    "meaning": "파일, 서류철",
+    "ex": "파일은 제 컴퓨터에 저장되어 있습니다."
+   }
+  }
+ },
+ {
+  "id": "print",
+  "word": "print",
+  "pos": "v.",
+  "level": 1,
+  "rank": 41,
+  "ex": "Please print ten copies.",
+  "tr": {
+   "ko": {
+    "meaning": "인쇄하다",
+    "ex": "열 부를 인쇄해 주세요."
+   }
+  }
+ },
+ {
+  "id": "check",
+  "word": "check",
+  "pos": "v.",
+  "level": 1,
+  "rank": 42,
+  "ex": "Check the address before you send it.",
+  "tr": {
+   "ko": {
+    "meaning": "확인하다",
+    "ex": "보내기 전에 주소를 확인하세요."
+   }
+  }
+ },
+ {
+  "id": "change",
+  "word": "change",
+  "pos": "n./v.",
+  "level": 1,
+  "rank": 43,
+  "ex": "There was a change in the schedule.",
+  "tr": {
+   "ko": {
+    "meaning": "변경(하다)",
+    "ex": "일정에 변경이 있었습니다."
+   }
+  }
+ },
+ {
+  "id": "repair",
+  "word": "repair",
+  "pos": "v.",
+  "level": 1,
+  "rank": 44,
+  "ex": "They will repair the printer today.",
+  "tr": {
+   "ko": {
+    "meaning": "수리하다",
+    "ex": "그들이 오늘 프린터를 수리할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "leave",
+  "word": "leave",
+  "pos": "v.",
+  "level": 1,
+  "rank": 45,
+  "ex": "The train leaves at ten.",
+  "tr": {
+   "ko": {
+    "meaning": "떠나다",
+    "ex": "기차는 10시에 떠납니다."
+   }
+  }
+ },
+ {
+  "id": "arrive",
+  "word": "arrive",
+  "pos": "v.",
+  "level": 1,
+  "rank": 46,
+  "ex": "The package will arrive tomorrow.",
+  "tr": {
+   "ko": {
+    "meaning": "도착하다",
+    "ex": "소포는 내일 도착할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "begin",
+  "word": "begin",
+  "pos": "v.",
+  "level": 1,
+  "rank": 47,
+  "ex": "The training will begin next week.",
+  "tr": {
+   "ko": {
+    "meaning": "시작하다",
+    "ex": "교육은 다음 주에 시작됩니다."
+   }
+  }
+ },
+ {
+  "id": "finish",
+  "word": "finish",
+  "pos": "v.",
+  "level": 1,
+  "rank": 48,
+  "ex": "I will finish the report tonight.",
+  "tr": {
+   "ko": {
+    "meaning": "끝내다",
+    "ex": "오늘 밤에 보고서를 끝낼 것입니다."
+   }
+  }
+ },
+ {
+  "id": "contact",
+  "word": "contact",
+  "pos": "v./n.",
+  "level": 1,
+  "rank": 49,
+  "ex": "Contact us if you have questions.",
+  "tr": {
+   "ko": {
+    "meaning": "연락(하다)",
+    "ex": "질문이 있으시면 연락 주세요."
+   }
+  }
+ },
+ {
+  "id": "receive",
+  "word": "receive",
+  "pos": "v.",
+  "level": 1,
+  "rank": 50,
+  "ex": "Did you receive my email?",
+  "tr": {
+   "ko": {
+    "meaning": "받다",
+    "ex": "제 이메일을 받으셨나요?"
+   }
+  }
+ },
+ {
+  "id": "deadline",
+  "word": "deadline",
+  "pos": "n.",
+  "level": 2,
+  "rank": 1,
+  "ex": "The deadline is next Friday.",
+  "tr": {
+   "ko": {
+    "meaning": "마감 기한",
+    "ex": "마감은 다음 주 금요일입니다."
+   }
+  }
+ },
+ {
+  "id": "colleague",
+  "word": "colleague",
+  "pos": "n.",
+  "level": 2,
+  "rank": 2,
+  "ex": "I had lunch with a colleague.",
+  "tr": {
+   "ko": {
+    "meaning": "동료",
+    "ex": "동료와 점심을 먹었습니다."
+   }
+  }
+ },
+ {
+  "id": "attend",
+  "word": "attend",
+  "pos": "v.",
+  "level": 2,
+  "rank": 3,
+  "ex": "All staff must attend the training.",
+  "tr": {
+   "ko": {
+    "meaning": "참석하다",
+    "ex": "모든 직원은 교육에 참석해야 합니다."
+   }
+  }
+ },
+ {
+  "id": "receipt",
+  "word": "receipt",
+  "pos": "n.",
+  "level": 2,
+  "rank": 4,
+  "ex": "Keep the receipt for a refund.",
+  "tr": {
+   "ko": {
+    "meaning": "영수증",
+    "ex": "환불을 위해 영수증을 보관하세요."
+   }
+  }
+ },
+ {
+  "id": "reserve",
+  "word": "reserve",
+  "pos": "v.",
+  "level": 2,
+  "rank": 5,
+  "ex": "I would like to reserve a table.",
+  "tr": {
+   "ko": {
+    "meaning": "예약하다",
+    "ex": "테이블을 예약하고 싶습니다."
+   }
+  }
+ },
+ {
+  "id": "refund",
+  "word": "refund",
+  "pos": "n./v.",
+  "level": 2,
+  "rank": 6,
+  "ex": "You can get a full refund.",
+  "tr": {
+   "ko": {
+    "meaning": "환불(하다)",
+    "ex": "전액 환불받을 수 있습니다."
+   }
+  }
+ },
+ {
+  "id": "appointment",
+  "word": "appointment",
+  "pos": "n.",
+  "level": 2,
+  "rank": 7,
+  "ex": "I have a dental appointment today.",
+  "tr": {
+   "ko": {
+    "meaning": "약속, 예약",
+    "ex": "오늘 치과 예약이 있습니다."
+   }
+  }
+ },
+ {
+  "id": "department",
+  "word": "department",
+  "pos": "n.",
+  "level": 2,
+  "rank": 8,
+  "ex": "She works in the sales department.",
+  "tr": {
+   "ko": {
+    "meaning": "부서",
+    "ex": "그녀는 영업 부서에서 일합니다."
+   }
+  }
+ },
+ {
+  "id": "delivery",
+  "word": "delivery",
+  "pos": "n.",
+  "level": 2,
+  "rank": 9,
+  "ex": "Delivery takes two business days.",
+  "tr": {
+   "ko": {
+    "meaning": "배달",
+    "ex": "배달은 영업일 이틀이 걸립니다."
+   }
+  }
+ },
+ {
+  "id": "employee",
+  "word": "employee",
+  "pos": "n.",
+  "level": 2,
+  "rank": 10,
+  "ex": "Each employee gets a security badge.",
+  "tr": {
+   "ko": {
+    "meaning": "직원",
+    "ex": "직원마다 보안 배지를 받습니다."
+   }
+  }
+ },
+ {
+  "id": "invoice",
+  "word": "invoice",
+  "pos": "n.",
+  "level": 2,
+  "rank": 11,
+  "ex": "The invoice was sent last week.",
+  "tr": {
+   "ko": {
+    "meaning": "송장, 청구서",
+    "ex": "청구서는 지난주에 발송되었습니다."
+   }
+  }
+ },
+ {
+  "id": "budget",
+  "word": "budget",
+  "pos": "n.",
+  "level": 2,
+  "rank": 12,
+  "ex": "The budget for travel is limited.",
+  "tr": {
+   "ko": {
+    "meaning": "예산",
+    "ex": "출장 예산은 제한적입니다."
+   }
+  }
+ },
+ {
+  "id": "profit",
+  "word": "profit",
+  "pos": "n.",
+  "level": 2,
+  "rank": 13,
+  "ex": "The company made a large profit.",
+  "tr": {
+   "ko": {
+    "meaning": "이익",
+    "ex": "회사는 큰 이익을 냈습니다."
+   }
+  }
+ },
+ {
+  "id": "expense",
+  "word": "expense",
+  "pos": "n.",
+  "level": 2,
+  "rank": 14,
+  "ex": "Please list every expense on this form.",
+  "tr": {
+   "ko": {
+    "meaning": "비용, 지출",
+    "ex": "이 양식에 모든 지출을 적어 주세요."
+   }
+  }
+ },
+ {
+  "id": "salary",
+  "word": "salary",
+  "pos": "n.",
+  "level": 2,
+  "rank": 15,
+  "ex": "His salary is paid on the 25th.",
+  "tr": {
+   "ko": {
+    "meaning": "급여",
+    "ex": "그의 급여는 25일에 지급됩니다."
+   }
+  }
+ },
+ {
+  "id": "promote",
+  "word": "promote",
+  "pos": "v.",
+  "level": 2,
+  "rank": 16,
+  "ex": "She was promoted to team leader.",
+  "tr": {
+   "ko": {
+    "meaning": "승진시키다; 홍보하다",
+    "ex": "그녀는 팀장으로 승진했습니다."
+   }
+  }
+ },
+ {
+  "id": "position",
+  "word": "position",
+  "pos": "n.",
+  "level": 2,
+  "rank": 17,
+  "ex": "The position requires two years of experience.",
+  "tr": {
+   "ko": {
+    "meaning": "직책, 자리",
+    "ex": "그 직책은 2년의 경력이 필요합니다."
+   }
+  }
+ },
+ {
+  "id": "applicant",
+  "word": "applicant",
+  "pos": "n.",
+  "level": 2,
+  "rank": 18,
+  "ex": "Every applicant will be interviewed.",
+  "tr": {
+   "ko": {
+    "meaning": "지원자",
+    "ex": "모든 지원자가 면접을 볼 것입니다."
+   }
+  }
+ },
+ {
+  "id": "resume",
+  "word": "resume",
+  "pos": "n.",
+  "level": 2,
+  "rank": 19,
+  "ex": "Please attach your resume to the email.",
+  "tr": {
+   "ko": {
+    "meaning": "이력서",
+    "ex": "이메일에 이력서를 첨부해 주세요."
+   }
+  }
+ },
+ {
+  "id": "interview",
+  "word": "interview",
+  "pos": "n.",
+  "level": 2,
+  "rank": 20,
+  "ex": "The interview lasted about an hour.",
+  "tr": {
+   "ko": {
+    "meaning": "면접",
+    "ex": "면접은 약 한 시간 걸렸습니다."
+   }
+  }
+ },
+ {
+  "id": "training",
+  "word": "training",
+  "pos": "n.",
+  "level": 2,
+  "rank": 21,
+  "ex": "New staff receive a week of training.",
+  "tr": {
+   "ko": {
+    "meaning": "교육, 훈련",
+    "ex": "신입 직원은 일주일간 교육을 받습니다."
+   }
+  }
+ },
+ {
+  "id": "conference",
+  "word": "conference",
+  "pos": "n.",
+  "level": 2,
+  "rank": 22,
+  "ex": "The conference will be held in Busan.",
+  "tr": {
+   "ko": {
+    "meaning": "회의, 학회",
+    "ex": "학회는 부산에서 열릴 예정입니다."
+   }
+  }
+ },
+ {
+  "id": "agenda",
+  "word": "agenda",
+  "pos": "n.",
+  "level": 2,
+  "rank": 23,
+  "ex": "The agenda was sent before the meeting.",
+  "tr": {
+   "ko": {
+    "meaning": "안건, 의제",
+    "ex": "안건은 회의 전에 발송되었습니다."
+   }
+  }
+ },
+ {
+  "id": "presentation",
+  "word": "presentation",
+  "pos": "n.",
+  "level": 2,
+  "rank": 24,
+  "ex": "His presentation was clear and short.",
+  "tr": {
+   "ko": {
+    "meaning": "발표",
+    "ex": "그의 발표는 명확하고 짧았습니다."
+   }
+  }
+ },
+ {
+  "id": "proposal",
+  "word": "proposal",
+  "pos": "n.",
+  "level": 2,
+  "rank": 25,
+  "ex": "We accepted the proposal yesterday.",
+  "tr": {
+   "ko": {
+    "meaning": "제안서",
+    "ex": "우리는 어제 그 제안을 받아들였습니다."
+   }
+  }
+ },
+ {
+  "id": "contract",
+  "word": "contract",
+  "pos": "n.",
+  "level": 2,
+  "rank": 26,
+  "ex": "Both sides signed the contract.",
+  "tr": {
+   "ko": {
+    "meaning": "계약(서)",
+    "ex": "양측이 계약서에 서명했습니다."
+   }
+  }
+ },
+ {
+  "id": "agreement",
+  "word": "agreement",
+  "pos": "n.",
+  "level": 2,
+  "rank": 27,
+  "ex": "They reached an agreement on the price.",
+  "tr": {
+   "ko": {
+    "meaning": "합의, 계약",
+    "ex": "그들은 가격에 합의했습니다."
+   }
+  }
+ },
+ {
+  "id": "discount",
+  "word": "discount",
+  "pos": "n.",
+  "level": 2,
+  "rank": 28,
+  "ex": "Members get a ten percent discount.",
+  "tr": {
+   "ko": {
+    "meaning": "할인",
+    "ex": "회원은 10% 할인을 받습니다."
+   }
+  }
+ },
+ {
+  "id": "warranty",
+  "word": "warranty",
+  "pos": "n.",
+  "level": 2,
+  "rank": 29,
+  "ex": "The warranty covers repairs for two years.",
+  "tr": {
+   "ko": {
+    "meaning": "품질 보증(서)",
+    "ex": "보증은 2년간 수리를 보장합니다."
+   }
+  }
+ },
+ {
+  "id": "install",
+  "word": "install",
+  "pos": "v.",
+  "level": 2,
+  "rank": 30,
+  "ex": "A technician will install the software.",
+  "tr": {
+   "ko": {
+    "meaning": "설치하다",
+    "ex": "기술자가 소프트웨어를 설치할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "manufacture",
+  "word": "manufacture",
+  "pos": "v.",
+  "level": 2,
+  "rank": 31,
+  "ex": "The firm manufactures car parts.",
+  "tr": {
+   "ko": {
+    "meaning": "제조하다",
+    "ex": "그 회사는 자동차 부품을 제조합니다."
+   }
+  }
+ },
+ {
+  "id": "equipment",
+  "word": "equipment",
+  "pos": "n.",
+  "level": 2,
+  "rank": 32,
+  "ex": "All equipment must be returned today.",
+  "tr": {
+   "ko": {
+    "meaning": "장비",
+    "ex": "모든 장비는 오늘 반납해야 합니다."
+   }
+  }
+ },
+ {
+  "id": "supply",
+  "word": "supply",
+  "pos": "n./v.",
+  "level": 2,
+  "rank": 33,
+  "ex": "Our office is running out of supplies.",
+  "tr": {
+   "ko": {
+    "meaning": "공급(하다); 용품",
+    "ex": "우리 사무실은 용품이 떨어져 가고 있습니다."
+   }
+  }
+ },
+ {
+  "id": "shipping",
+  "word": "shipping",
+  "pos": "n.",
+  "level": 2,
+  "rank": 34,
+  "ex": "Shipping is free for orders over fifty dollars.",
+  "tr": {
+   "ko": {
+    "meaning": "배송",
+    "ex": "50달러 이상 주문은 배송이 무료입니다."
+   }
+  }
+ },
+ {
+  "id": "warehouse",
+  "word": "warehouse",
+  "pos": "n.",
+  "level": 2,
+  "rank": 35,
+  "ex": "The goods are stored in a warehouse.",
+  "tr": {
+   "ko": {
+    "meaning": "창고",
+    "ex": "상품은 창고에 보관됩니다."
+   }
+  }
+ },
+ {
+  "id": "itinerary",
+  "word": "itinerary",
+  "pos": "n.",
+  "level": 2,
+  "rank": 36,
+  "ex": "Your itinerary is attached to this email.",
+  "tr": {
+   "ko": {
+    "meaning": "여행 일정표",
+    "ex": "여행 일정표가 이메일에 첨부되어 있습니다."
+   }
+  }
+ },
+ {
+  "id": "luggage",
+  "word": "luggage",
+  "pos": "n.",
+  "level": 2,
+  "rank": 37,
+  "ex": "Please keep your luggage with you.",
+  "tr": {
+   "ko": {
+    "meaning": "짐, 수하물",
+    "ex": "짐은 직접 지니고 계세요."
+   }
+  }
+ },
+ {
+  "id": "reservation",
+  "word": "reservation",
+  "pos": "n.",
+  "level": 2,
+  "rank": 38,
+  "ex": "I made a reservation for six people.",
+  "tr": {
+   "ko": {
+    "meaning": "예약",
+    "ex": "6인 예약을 했습니다."
+   }
+  }
+ },
+ {
+  "id": "complain",
+  "word": "complain",
+  "pos": "v.",
+  "level": 2,
+  "rank": 39,
+  "ex": "Several guests complained about the noise.",
+  "tr": {
+   "ko": {
+    "meaning": "불평하다",
+    "ex": "여러 투숙객이 소음에 대해 불평했습니다."
+   }
+  }
+ },
+ {
+  "id": "feedback",
+  "word": "feedback",
+  "pos": "n.",
+  "level": 2,
+  "rank": 40,
+  "ex": "We welcome your feedback on the service.",
+  "tr": {
+   "ko": {
+    "meaning": "피드백, 의견",
+    "ex": "서비스에 대한 의견을 환영합니다."
+   }
+  }
+ },
+ {
+  "id": "survey",
+  "word": "survey",
+  "pos": "n.",
+  "level": 2,
+  "rank": 41,
+  "ex": "Please complete the short survey.",
+  "tr": {
+   "ko": {
+    "meaning": "설문 조사",
+    "ex": "짧은 설문 조사에 응해 주세요."
+   }
+  }
+ },
+ {
+  "id": "announce",
+  "word": "announce",
+  "pos": "v.",
+  "level": 2,
+  "rank": 42,
+  "ex": "The firm announced a new product.",
+  "tr": {
+   "ko": {
+    "meaning": "발표하다",
+    "ex": "회사는 신제품을 발표했습니다."
+   }
+  }
+ },
+ {
+  "id": "launch",
+  "word": "launch",
+  "pos": "v.",
+  "level": 2,
+  "rank": 43,
+  "ex": "They will launch the app in May.",
+  "tr": {
+   "ko": {
+    "meaning": "출시하다",
+    "ex": "그들은 5월에 앱을 출시할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "expand",
+  "word": "expand",
+  "pos": "v.",
+  "level": 2,
+  "rank": 44,
+  "ex": "We plan to expand our business abroad.",
+  "tr": {
+   "ko": {
+    "meaning": "확장하다",
+    "ex": "우리는 해외로 사업을 확장할 계획입니다."
+   }
+  }
+ },
+ {
+  "id": "recruit",
+  "word": "recruit",
+  "pos": "v.",
+  "level": 2,
+  "rank": 45,
+  "ex": "The bank is recruiting new graduates.",
+  "tr": {
+   "ko": {
+    "meaning": "채용하다",
+    "ex": "은행은 신입 졸업생을 채용하고 있습니다."
+   }
+  }
+ },
+ {
+  "id": "submit",
+  "word": "submit",
+  "pos": "v.",
+  "level": 2,
+  "rank": 46,
+  "ex": "Submit your form by Monday.",
+  "tr": {
+   "ko": {
+    "meaning": "제출하다",
+    "ex": "월요일까지 양식을 제출하세요."
+   }
+  }
+ },
+ {
+  "id": "approve",
+  "word": "approve",
+  "pos": "v.",
+  "level": 2,
+  "rank": 47,
+  "ex": "The director approved the budget.",
+  "tr": {
+   "ko": {
+    "meaning": "승인하다",
+    "ex": "이사님이 예산을 승인했습니다."
+   }
+  }
+ },
+ {
+  "id": "postpone",
+  "word": "postpone",
+  "pos": "v.",
+  "level": 2,
+  "rank": 48,
+  "ex": "The meeting was postponed until Friday.",
+  "tr": {
+   "ko": {
+    "meaning": "연기하다",
+    "ex": "회의는 금요일로 연기되었습니다."
+   }
+  }
+ },
+ {
+  "id": "cancel",
+  "word": "cancel",
+  "pos": "v.",
+  "level": 2,
+  "rank": 49,
+  "ex": "We had to cancel the event.",
+  "tr": {
+   "ko": {
+    "meaning": "취소하다",
+    "ex": "우리는 행사를 취소해야 했습니다."
+   }
+  }
+ },
+ {
+  "id": "confirm",
+  "word": "confirm",
+  "pos": "v.",
+  "level": 2,
+  "rank": 50,
+  "ex": "Please confirm your attendance by email.",
+  "tr": {
+   "ko": {
+    "meaning": "확인해 주다, 확정하다",
+    "ex": "이메일로 참석을 확정해 주세요."
+   }
+  }
+ },
+ {
+  "id": "negotiate",
+  "word": "negotiate",
+  "pos": "v.",
+  "level": 3,
+  "rank": 1,
+  "ex": "They negotiated a better contract.",
+  "tr": {
+   "ko": {
+    "meaning": "협상하다",
+    "ex": "그들은 더 나은 계약을 협상했습니다."
+   }
+  }
+ },
+ {
+  "id": "supplier",
+  "word": "supplier",
+  "pos": "n.",
+  "level": 3,
+  "rank": 2,
+  "ex": "We changed our main supplier.",
+  "tr": {
+   "ko": {
+    "meaning": "공급업체",
+    "ex": "우리는 주 공급업체를 바꿨습니다."
+   }
+  }
+ },
+ {
+  "id": "estimate",
+  "word": "estimate",
+  "pos": "n./v.",
+  "level": 3,
+  "rank": 3,
+  "ex": "Please send a written estimate.",
+  "tr": {
+   "ko": {
+    "meaning": "견적; 추정하다",
+    "ex": "서면 견적서를 보내 주세요."
+   }
+  }
+ },
+ {
+  "id": "inventory",
+  "word": "inventory",
+  "pos": "n.",
+  "level": 3,
+  "rank": 4,
+  "ex": "The store checks its inventory weekly.",
+  "tr": {
+   "ko": {
+    "meaning": "재고",
+    "ex": "그 매장은 매주 재고를 점검합니다."
+   }
+  }
+ },
+ {
+  "id": "renew",
+  "word": "renew",
+  "pos": "v.",
+  "level": 3,
+  "rank": 5,
+  "ex": "You must renew your membership.",
+  "tr": {
+   "ko": {
+    "meaning": "갱신하다",
+    "ex": "회원 자격을 갱신해야 합니다."
+   }
+  }
+ },
+ {
+  "id": "reimburse",
+  "word": "reimburse",
+  "pos": "v.",
+  "level": 3,
+  "rank": 6,
+  "ex": "The company will reimburse travel costs.",
+  "tr": {
+   "ko": {
+    "meaning": "(비용을) 환급하다",
+    "ex": "회사가 출장비를 변제해 줄 것입니다."
+   }
+  }
+ },
+ {
+  "id": "requirement",
+  "word": "requirement",
+  "pos": "n.",
+  "level": 3,
+  "rank": 7,
+  "ex": "Experience is a job requirement.",
+  "tr": {
+   "ko": {
+    "meaning": "요건, 필요 조건",
+    "ex": "경력은 채용 요건입니다."
+   }
+  }
+ },
+ {
+  "id": "vacancy",
+  "word": "vacancy",
+  "pos": "n.",
+  "level": 3,
+  "rank": 8,
+  "ex": "There is a vacancy in accounting.",
+  "tr": {
+   "ko": {
+    "meaning": "공석, 빈 방",
+    "ex": "회계 부서에 공석이 있습니다."
+   }
+  }
+ },
+ {
+  "id": "shipment",
+  "word": "shipment",
+  "pos": "n.",
+  "level": 3,
+  "rank": 9,
+  "ex": "The shipment arrived late.",
+  "tr": {
+   "ko": {
+    "meaning": "선적, 배송품",
+    "ex": "배송품이 늦게 도착했습니다."
+   }
+  }
+ },
+ {
+  "id": "outstanding",
+  "word": "outstanding",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 10,
+  "ex": "There is an outstanding balance.",
+  "tr": {
+   "ko": {
+    "meaning": "미지급의; 뛰어난",
+    "ex": "미납 잔액이 있습니다."
+   }
+  }
+ },
+ {
+  "id": "revenue",
+  "word": "revenue",
+  "pos": "n.",
+  "level": 3,
+  "rank": 11,
+  "ex": "Annual revenue increased by twelve percent.",
+  "tr": {
+   "ko": {
+    "meaning": "수익, 매출",
+    "ex": "연간 매출이 12% 늘었습니다."
+   }
+  }
+ },
+ {
+  "id": "quarterly",
+  "word": "quarterly",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 12,
+  "ex": "The quarterly report is due Friday.",
+  "tr": {
+   "ko": {
+    "meaning": "분기별의",
+    "ex": "분기 보고서는 금요일까지입니다."
+   }
+  }
+ },
+ {
+  "id": "merger",
+  "word": "merger",
+  "pos": "n.",
+  "level": 3,
+  "rank": 13,
+  "ex": "The merger will create a larger firm.",
+  "tr": {
+   "ko": {
+    "meaning": "합병",
+    "ex": "합병으로 더 큰 회사가 만들어질 것입니다."
+   }
+  }
+ },
+ {
+  "id": "acquire",
+  "word": "acquire",
+  "pos": "v.",
+  "level": 3,
+  "rank": 14,
+  "ex": "The firm acquired a smaller rival.",
+  "tr": {
+   "ko": {
+    "meaning": "인수하다, 얻다",
+    "ex": "회사는 더 작은 경쟁사를 인수했습니다."
+   }
+  }
+ },
+ {
+  "id": "competitor",
+  "word": "competitor",
+  "pos": "n.",
+  "level": 3,
+  "rank": 15,
+  "ex": "Our competitor lowered its prices.",
+  "tr": {
+   "ko": {
+    "meaning": "경쟁사",
+    "ex": "경쟁사가 가격을 낮췄습니다."
+   }
+  }
+ },
+ {
+  "id": "strategy",
+  "word": "strategy",
+  "pos": "n.",
+  "level": 3,
+  "rank": 16,
+  "ex": "We need a new marketing strategy.",
+  "tr": {
+   "ko": {
+    "meaning": "전략",
+    "ex": "우리는 새로운 마케팅 전략이 필요합니다."
+   }
+  }
+ },
+ {
+  "id": "implement",
+  "word": "implement",
+  "pos": "v.",
+  "level": 3,
+  "rank": 17,
+  "ex": "The company will implement the plan in May.",
+  "tr": {
+   "ko": {
+    "meaning": "시행하다",
+    "ex": "회사는 5월에 계획을 시행할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "policy",
+  "word": "policy",
+  "pos": "n.",
+  "level": 3,
+  "rank": 18,
+  "ex": "The return policy is on the receipt.",
+  "tr": {
+   "ko": {
+    "meaning": "정책, 방침",
+    "ex": "반품 방침은 영수증에 있습니다."
+   }
+  }
+ },
+ {
+  "id": "regulation",
+  "word": "regulation",
+  "pos": "n.",
+  "level": 3,
+  "rank": 19,
+  "ex": "New safety regulations take effect today.",
+  "tr": {
+   "ko": {
+    "meaning": "규정",
+    "ex": "새 안전 규정이 오늘 발효됩니다."
+   }
+  }
+ },
+ {
+  "id": "qualification",
+  "word": "qualification",
+  "pos": "n.",
+  "level": 3,
+  "rank": 20,
+  "ex": "She has the right qualifications for the job.",
+  "tr": {
+   "ko": {
+    "meaning": "자격, 자격 요건",
+    "ex": "그녀는 그 일에 적합한 자격을 갖췄습니다."
+   }
+  }
+ },
+ {
+  "id": "candidate",
+  "word": "candidate",
+  "pos": "n.",
+  "level": 3,
+  "rank": 21,
+  "ex": "The best candidate will be hired.",
+  "tr": {
+   "ko": {
+    "meaning": "후보자",
+    "ex": "최적의 후보자가 채용될 것입니다."
+   }
+  }
+ },
+ {
+  "id": "supervisor",
+  "word": "supervisor",
+  "pos": "n.",
+  "level": 3,
+  "rank": 22,
+  "ex": "Please ask your supervisor for approval.",
+  "tr": {
+   "ko": {
+    "meaning": "감독관, 상사",
+    "ex": "상사에게 승인을 요청하세요."
+   }
+  }
+ },
+ {
+  "id": "personnel",
+  "word": "personnel",
+  "pos": "n.",
+  "level": 3,
+  "rank": 23,
+  "ex": "Only authorized personnel may enter.",
+  "tr": {
+   "ko": {
+    "meaning": "직원, 인사부",
+    "ex": "허가된 직원만 들어갈 수 있습니다."
+   }
+  }
+ },
+ {
+  "id": "compensation",
+  "word": "compensation",
+  "pos": "n.",
+  "level": 3,
+  "rank": 24,
+  "ex": "Employees receive compensation for overtime.",
+  "tr": {
+   "ko": {
+    "meaning": "보상",
+    "ex": "직원은 초과근무에 대한 보상을 받습니다."
+   }
+  }
+ },
+ {
+  "id": "benefit",
+  "word": "benefit",
+  "pos": "n.",
+  "level": 3,
+  "rank": 25,
+  "ex": "The job comes with good benefits.",
+  "tr": {
+   "ko": {
+    "meaning": "혜택, 복리후생",
+    "ex": "그 일자리에는 좋은 복리후생이 따릅니다."
+   }
+  }
+ },
+ {
+  "id": "deposit",
+  "word": "deposit",
+  "pos": "n.",
+  "level": 3,
+  "rank": 26,
+  "ex": "A deposit is required to book the room.",
+  "tr": {
+   "ko": {
+    "meaning": "보증금; 예금",
+    "ex": "객실 예약에는 보증금이 필요합니다."
+   }
+  }
+ },
+ {
+  "id": "balance",
+  "word": "balance",
+  "pos": "n.",
+  "level": 3,
+  "rank": 27,
+  "ex": "Please check your account balance.",
+  "tr": {
+   "ko": {
+    "meaning": "잔액",
+    "ex": "계좌 잔액을 확인해 주세요."
+   }
+  }
+ },
+ {
+  "id": "transaction",
+  "word": "transaction",
+  "pos": "n.",
+  "level": 3,
+  "rank": 28,
+  "ex": "The transaction was completed successfully.",
+  "tr": {
+   "ko": {
+    "meaning": "거래",
+    "ex": "거래가 성공적으로 완료되었습니다."
+   }
+  }
+ },
+ {
+  "id": "accounting",
+  "word": "accounting",
+  "pos": "n.",
+  "level": 3,
+  "rank": 29,
+  "ex": "He studied accounting at university.",
+  "tr": {
+   "ko": {
+    "meaning": "회계",
+    "ex": "그는 대학에서 회계를 공부했습니다."
+   }
+  }
+ },
+ {
+  "id": "audit",
+  "word": "audit",
+  "pos": "n./v.",
+  "level": 3,
+  "rank": 30,
+  "ex": "An outside firm will audit our records.",
+  "tr": {
+   "ko": {
+    "meaning": "감사(하다)",
+    "ex": "외부 회사가 우리 기록을 감사할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "invest",
+  "word": "invest",
+  "pos": "v.",
+  "level": 3,
+  "rank": 31,
+  "ex": "They invested heavily in new technology.",
+  "tr": {
+   "ko": {
+    "meaning": "투자하다",
+    "ex": "그들은 신기술에 많이 투자했습니다."
+   }
+  }
+ },
+ {
+  "id": "distribute",
+  "word": "distribute",
+  "pos": "v.",
+  "level": 3,
+  "rank": 32,
+  "ex": "Please distribute the handouts before the talk.",
+  "tr": {
+   "ko": {
+    "meaning": "배포하다, 유통하다",
+    "ex": "강연 전에 자료를 나눠 주세요."
+   }
+  }
+ },
+ {
+  "id": "maintenance",
+  "word": "maintenance",
+  "pos": "n.",
+  "level": 3,
+  "rank": 33,
+  "ex": "The elevator is closed for maintenance.",
+  "tr": {
+   "ko": {
+    "meaning": "유지 보수",
+    "ex": "엘리베이터는 점검으로 운행하지 않습니다."
+   }
+  }
+ },
+ {
+  "id": "renovation",
+  "word": "renovation",
+  "pos": "n.",
+  "level": 3,
+  "rank": 34,
+  "ex": "The lobby is under renovation.",
+  "tr": {
+   "ko": {
+    "meaning": "개조, 보수",
+    "ex": "로비는 보수 공사 중입니다."
+   }
+  }
+ },
+ {
+  "id": "facility",
+  "word": "facility",
+  "pos": "n.",
+  "level": 3,
+  "rank": 35,
+  "ex": "The new facility opens next month.",
+  "tr": {
+   "ko": {
+    "meaning": "시설",
+    "ex": "새 시설이 다음 달에 문을 엽니다."
+   }
+  }
+ },
+ {
+  "id": "attendee",
+  "word": "attendee",
+  "pos": "n.",
+  "level": 3,
+  "rank": 36,
+  "ex": "Each attendee will receive a name tag.",
+  "tr": {
+   "ko": {
+    "meaning": "참석자",
+    "ex": "참석자마다 명찰을 받습니다."
+   }
+  }
+ },
+ {
+  "id": "enroll",
+  "word": "enroll",
+  "pos": "v.",
+  "level": 3,
+  "rank": 37,
+  "ex": "Employees can enroll in the course online.",
+  "tr": {
+   "ko": {
+    "meaning": "등록하다",
+    "ex": "직원들은 온라인으로 과정에 등록할 수 있습니다."
+   }
+  }
+ },
+ {
+  "id": "registration",
+  "word": "registration",
+  "pos": "n.",
+  "level": 3,
+  "rank": 38,
+  "ex": "Registration closes on Friday.",
+  "tr": {
+   "ko": {
+    "meaning": "등록",
+    "ex": "등록은 금요일에 마감됩니다."
+   }
+  }
+ },
+ {
+  "id": "admission",
+  "word": "admission",
+  "pos": "n.",
+  "level": 3,
+  "rank": 39,
+  "ex": "Admission to the museum is free today.",
+  "tr": {
+   "ko": {
+    "meaning": "입장; 입학",
+    "ex": "오늘 박물관 입장은 무료입니다."
+   }
+  }
+ },
+ {
+  "id": "accommodate",
+  "word": "accommodate",
+  "pos": "v.",
+  "level": 3,
+  "rank": 40,
+  "ex": "The hall can accommodate 300 people.",
+  "tr": {
+   "ko": {
+    "meaning": "수용하다, 맞추다",
+    "ex": "그 홀은 300명을 수용할 수 있습니다."
+   }
+  }
+ },
+ {
+  "id": "consecutive",
+  "word": "consecutive",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 41,
+  "ex": "Sales rose for the third consecutive month.",
+  "tr": {
+   "ko": {
+    "meaning": "연속적인",
+    "ex": "매출이 3개월 연속 올랐습니다."
+   }
+  }
+ },
+ {
+  "id": "comprehensive",
+  "word": "comprehensive",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 42,
+  "ex": "We offer a comprehensive insurance plan.",
+  "tr": {
+   "ko": {
+    "meaning": "종합적인",
+    "ex": "우리는 종합 보험 상품을 제공합니다."
+   }
+  }
+ },
+ {
+  "id": "considerable",
+  "word": "considerable",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 43,
+  "ex": "The project required considerable effort.",
+  "tr": {
+   "ko": {
+    "meaning": "상당한",
+    "ex": "그 프로젝트는 상당한 노력이 필요했습니다."
+   }
+  }
+ },
+ {
+  "id": "eligible",
+  "word": "eligible",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 44,
+  "ex": "Full-time staff are eligible for the bonus.",
+  "tr": {
+   "ko": {
+    "meaning": "자격이 있는",
+    "ex": "정규직 직원은 보너스를 받을 자격이 있습니다."
+   }
+  }
+ },
+ {
+  "id": "mandatory",
+  "word": "mandatory",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 45,
+  "ex": "Attendance at the safety class is mandatory.",
+  "tr": {
+   "ko": {
+    "meaning": "의무적인",
+    "ex": "안전 교육 참석은 의무입니다."
+   }
+  }
+ },
+ {
+  "id": "permanent",
+  "word": "permanent",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 46,
+  "ex": "He accepted a permanent position at the firm.",
+  "tr": {
+   "ko": {
+    "meaning": "영구적인, 정규의",
+    "ex": "그는 회사의 정규직을 수락했습니다."
+   }
+  }
+ },
+ {
+  "id": "temporary",
+  "word": "temporary",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 47,
+  "ex": "We hired temporary workers for the season.",
+  "tr": {
+   "ko": {
+    "meaning": "임시의",
+    "ex": "우리는 시즌 동안 임시 직원을 고용했습니다."
+   }
+  }
+ },
+ {
+  "id": "substantial",
+  "word": "substantial",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 48,
+  "ex": "The firm made substantial progress this year.",
+  "tr": {
+   "ko": {
+    "meaning": "상당한, 실질적인",
+    "ex": "회사는 올해 상당한 진전을 이뤘습니다."
+   }
+  }
+ },
+ {
+  "id": "reliable",
+  "word": "reliable",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 49,
+  "ex": "We need a reliable delivery service.",
+  "tr": {
+   "ko": {
+    "meaning": "믿을 수 있는",
+    "ex": "우리는 믿을 수 있는 배송 서비스가 필요합니다."
+   }
+  }
+ },
+ {
+  "id": "flexible",
+  "word": "flexible",
+  "pos": "adj.",
+  "level": 3,
+  "rank": 50,
+  "ex": "The company offers flexible working hours.",
+  "tr": {
+   "ko": {
+    "meaning": "유연한",
+    "ex": "회사는 유연한 근무 시간을 제공합니다."
+   }
+  }
+ },
+ {
+  "id": "comply",
+  "word": "comply",
+  "pos": "v.",
+  "level": 4,
+  "rank": 1,
+  "ex": "All firms must comply with the law.",
+  "tr": {
+   "ko": {
+    "meaning": "준수하다",
+    "ex": "모든 회사는 법을 준수해야 합니다."
+   }
+  }
+ },
+ {
+  "id": "enforce",
+  "word": "enforce",
+  "pos": "v.",
+  "level": 4,
+  "rank": 2,
+  "ex": "The city will enforce the new rule.",
+  "tr": {
+   "ko": {
+    "meaning": "시행하다, 집행하다",
+    "ex": "시는 새 규칙을 시행할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "liability",
+  "word": "liability",
+  "pos": "n.",
+  "level": 4,
+  "rank": 3,
+  "ex": "The company denied any liability.",
+  "tr": {
+   "ko": {
+    "meaning": "법적 책임",
+    "ex": "회사는 어떤 책임도 부인했습니다."
+   }
+  }
+ },
+ {
+  "id": "amend",
+  "word": "amend",
+  "pos": "v.",
+  "level": 4,
+  "rank": 4,
+  "ex": "The contract was amended in May.",
+  "tr": {
+   "ko": {
+    "meaning": "수정하다",
+    "ex": "계약서는 5월에 수정되었습니다."
+   }
+  }
+ },
+ {
+  "id": "fiscal",
+  "word": "fiscal",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 5,
+  "ex": "The fiscal year ends in March.",
+  "tr": {
+   "ko": {
+    "meaning": "회계의, 재정의",
+    "ex": "회계연도는 3월에 끝납니다."
+   }
+  }
+ },
+ {
+  "id": "undertake",
+  "word": "undertake",
+  "pos": "v.",
+  "level": 4,
+  "rank": 6,
+  "ex": "They will undertake the renovation.",
+  "tr": {
+   "ko": {
+    "meaning": "착수하다, 맡다",
+    "ex": "그들이 보수 공사를 맡을 것입니다."
+   }
+  }
+ },
+ {
+  "id": "preliminary",
+  "word": "preliminary",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 7,
+  "ex": "Preliminary results look promising.",
+  "tr": {
+   "ko": {
+    "meaning": "예비의",
+    "ex": "예비 결과가 유망해 보입니다."
+   }
+  }
+ },
+ {
+  "id": "subsidiary",
+  "word": "subsidiary",
+  "pos": "n.",
+  "level": 4,
+  "rank": 8,
+  "ex": "It is a subsidiary of a larger firm.",
+  "tr": {
+   "ko": {
+    "meaning": "자회사",
+    "ex": "그것은 더 큰 회사의 자회사입니다."
+   }
+  }
+ },
+ {
+  "id": "stipulate",
+  "word": "stipulate",
+  "pos": "v.",
+  "level": 4,
+  "rank": 9,
+  "ex": "The contract stipulates a 30-day notice.",
+  "tr": {
+   "ko": {
+    "meaning": "규정하다, 명기하다",
+    "ex": "계약서는 30일 전 통지를 명시합니다."
+   }
+  }
+ },
+ {
+  "id": "indemnify",
+  "word": "indemnify",
+  "pos": "v.",
+  "level": 4,
+  "rank": 10,
+  "ex": "The insurer will indemnify the owner.",
+  "tr": {
+   "ko": {
+    "meaning": "(손해를) 배상하다",
+    "ex": "보험사가 소유주에게 보상할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "compliance",
+  "word": "compliance",
+  "pos": "n.",
+  "level": 4,
+  "rank": 11,
+  "ex": "Compliance with safety rules is required.",
+  "tr": {
+   "ko": {
+    "meaning": "준수",
+    "ex": "안전 규정 준수는 필수입니다."
+   }
+  }
+ },
+ {
+  "id": "jurisdiction",
+  "word": "jurisdiction",
+  "pos": "n.",
+  "level": 4,
+  "rank": 12,
+  "ex": "The case falls under federal jurisdiction.",
+  "tr": {
+   "ko": {
+    "meaning": "관할권",
+    "ex": "그 사건은 연방 관할에 속합니다."
+   }
+  }
+ },
+ {
+  "id": "arbitration",
+  "word": "arbitration",
+  "pos": "n.",
+  "level": 4,
+  "rank": 13,
+  "ex": "The dispute went to arbitration.",
+  "tr": {
+   "ko": {
+    "meaning": "중재",
+    "ex": "분쟁은 중재로 넘어갔습니다."
+   }
+  }
+ },
+ {
+  "id": "litigation",
+  "word": "litigation",
+  "pos": "n.",
+  "level": 4,
+  "rank": 14,
+  "ex": "The firm is involved in costly litigation.",
+  "tr": {
+   "ko": {
+    "meaning": "소송",
+    "ex": "그 회사는 비용이 큰 소송에 휘말려 있습니다."
+   }
+  }
+ },
+ {
+  "id": "breach",
+  "word": "breach",
+  "pos": "n.",
+  "level": 4,
+  "rank": 15,
+  "ex": "Late payment is a breach of contract.",
+  "tr": {
+   "ko": {
+    "meaning": "위반",
+    "ex": "대금 지연은 계약 위반입니다."
+   }
+  }
+ },
+ {
+  "id": "consolidate",
+  "word": "consolidate",
+  "pos": "v.",
+  "level": 4,
+  "rank": 16,
+  "ex": "The bank plans to consolidate its branches.",
+  "tr": {
+   "ko": {
+    "meaning": "통합하다",
+    "ex": "은행은 지점을 통합할 계획입니다."
+   }
+  }
+ },
+ {
+  "id": "incur",
+  "word": "incur",
+  "pos": "v.",
+  "level": 4,
+  "rank": 17,
+  "ex": "The company incurred heavy losses last year.",
+  "tr": {
+   "ko": {
+    "meaning": "(비용 등을) 떠안다",
+    "ex": "회사는 작년에 큰 손실을 입었습니다."
+   }
+  }
+ },
+ {
+  "id": "allocate",
+  "word": "allocate",
+  "pos": "v.",
+  "level": 4,
+  "rank": 18,
+  "ex": "We will allocate more funds to research.",
+  "tr": {
+   "ko": {
+    "meaning": "할당하다",
+    "ex": "연구에 더 많은 자금을 할당할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "forecast",
+  "word": "forecast",
+  "pos": "n./v.",
+  "level": 4,
+  "rank": 19,
+  "ex": "The forecast predicts slower growth.",
+  "tr": {
+   "ko": {
+    "meaning": "예측(하다)",
+    "ex": "예측에 따르면 성장이 둔화될 것입니다."
+   }
+  }
+ },
+ {
+  "id": "projection",
+  "word": "projection",
+  "pos": "n.",
+  "level": 4,
+  "rank": 20,
+  "ex": "Sales projections were revised downward.",
+  "tr": {
+   "ko": {
+    "meaning": "예상, 전망",
+    "ex": "매출 전망이 하향 조정되었습니다."
+   }
+  }
+ },
+ {
+  "id": "depreciation",
+  "word": "depreciation",
+  "pos": "n.",
+  "level": 4,
+  "rank": 21,
+  "ex": "Depreciation reduces the value of equipment.",
+  "tr": {
+   "ko": {
+    "meaning": "감가상각",
+    "ex": "감가상각은 장비의 가치를 줄입니다."
+   }
+  }
+ },
+ {
+  "id": "equity",
+  "word": "equity",
+  "pos": "n.",
+  "level": 4,
+  "rank": 22,
+  "ex": "The investor holds a large equity stake.",
+  "tr": {
+   "ko": {
+    "meaning": "자기자본, 지분",
+    "ex": "그 투자자는 큰 지분을 보유합니다."
+   }
+  }
+ },
+ {
+  "id": "dividend",
+  "word": "dividend",
+  "pos": "n.",
+  "level": 4,
+  "rank": 23,
+  "ex": "Shareholders will receive a dividend in June.",
+  "tr": {
+   "ko": {
+    "meaning": "배당금",
+    "ex": "주주들은 6월에 배당금을 받습니다."
+   }
+  }
+ },
+ {
+  "id": "acquisition",
+  "word": "acquisition",
+  "pos": "n.",
+  "level": 4,
+  "rank": 24,
+  "ex": "The acquisition was completed in March.",
+  "tr": {
+   "ko": {
+    "meaning": "인수",
+    "ex": "인수는 3월에 완료되었습니다."
+   }
+  }
+ },
+ {
+  "id": "shareholder",
+  "word": "shareholder",
+  "pos": "n.",
+  "level": 4,
+  "rank": 25,
+  "ex": "Shareholders approved the merger plan.",
+  "tr": {
+   "ko": {
+    "meaning": "주주",
+    "ex": "주주들이 합병안을 승인했습니다."
+   }
+  }
+ },
+ {
+  "id": "prospectus",
+  "word": "prospectus",
+  "pos": "n.",
+  "level": 4,
+  "rank": 26,
+  "ex": "Read the prospectus before you invest.",
+  "tr": {
+   "ko": {
+    "meaning": "투자 설명서",
+    "ex": "투자하기 전에 설명서를 읽으세요."
+   }
+  }
+ },
+ {
+  "id": "prerequisite",
+  "word": "prerequisite",
+  "pos": "n.",
+  "level": 4,
+  "rank": 27,
+  "ex": "A degree is a prerequisite for the course.",
+  "tr": {
+   "ko": {
+    "meaning": "전제 조건",
+    "ex": "학위는 그 과정의 전제 조건입니다."
+   }
+  }
+ },
+ {
+  "id": "stringent",
+  "word": "stringent",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 28,
+  "ex": "The factory follows stringent quality standards.",
+  "tr": {
+   "ko": {
+    "meaning": "엄격한",
+    "ex": "공장은 엄격한 품질 기준을 따릅니다."
+   }
+  }
+ },
+ {
+  "id": "pending",
+  "word": "pending",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 29,
+  "ex": "The decision is still pending.",
+  "tr": {
+   "ko": {
+    "meaning": "보류 중인",
+    "ex": "결정은 아직 보류 중입니다."
+   }
+  }
+ },
+ {
+  "id": "contingent",
+  "word": "contingent",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 30,
+  "ex": "The offer is contingent on a background check.",
+  "tr": {
+   "ko": {
+    "meaning": "~에 달려 있는",
+    "ex": "그 제안은 신원 조회에 달려 있습니다."
+   }
+  }
+ },
+ {
+  "id": "reciprocal",
+  "word": "reciprocal",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 31,
+  "ex": "Both firms signed a reciprocal agreement.",
+  "tr": {
+   "ko": {
+    "meaning": "상호의",
+    "ex": "두 회사는 상호 협정을 맺었습니다."
+   }
+  }
+ },
+ {
+  "id": "expedite",
+  "word": "expedite",
+  "pos": "v.",
+  "level": 4,
+  "rank": 32,
+  "ex": "We can expedite your order for a fee.",
+  "tr": {
+   "ko": {
+    "meaning": "신속히 처리하다",
+    "ex": "수수료를 내시면 주문을 빨리 처리해 드립니다."
+   }
+  }
+ },
+ {
+  "id": "rectify",
+  "word": "rectify",
+  "pos": "v.",
+  "level": 4,
+  "rank": 33,
+  "ex": "We will rectify the error immediately.",
+  "tr": {
+   "ko": {
+    "meaning": "바로잡다",
+    "ex": "오류를 즉시 바로잡겠습니다."
+   }
+  }
+ },
+ {
+  "id": "mitigate",
+  "word": "mitigate",
+  "pos": "v.",
+  "level": 4,
+  "rank": 34,
+  "ex": "Steps were taken to mitigate the risk.",
+  "tr": {
+   "ko": {
+    "meaning": "완화하다",
+    "ex": "위험을 완화하기 위한 조치가 취해졌습니다."
+   }
+  }
+ },
+ {
+  "id": "reinforce",
+  "word": "reinforce",
+  "pos": "v.",
+  "level": 4,
+  "rank": 35,
+  "ex": "The new rule will reinforce data security.",
+  "tr": {
+   "ko": {
+    "meaning": "강화하다",
+    "ex": "새 규칙은 데이터 보안을 강화할 것입니다."
+   }
+  }
+ },
+ {
+  "id": "supersede",
+  "word": "supersede",
+  "pos": "v.",
+  "level": 4,
+  "rank": 36,
+  "ex": "This policy supersedes all previous versions.",
+  "tr": {
+   "ko": {
+    "meaning": "대체하다",
+    "ex": "이 방침은 이전의 모든 버전을 대체합니다."
+   }
+  }
+ },
+ {
+  "id": "relinquish",
+  "word": "relinquish",
+  "pos": "v.",
+  "level": 4,
+  "rank": 37,
+  "ex": "He relinquished his seat on the board.",
+  "tr": {
+   "ko": {
+    "meaning": "포기하다",
+    "ex": "그는 이사회 자리를 내놓았습니다."
+   }
+  }
+ },
+ {
+  "id": "solicit",
+  "word": "solicit",
+  "pos": "v.",
+  "level": 4,
+  "rank": 38,
+  "ex": "The firm solicited bids from several vendors.",
+  "tr": {
+   "ko": {
+    "meaning": "요청하다, 구하다",
+    "ex": "회사는 여러 업체에 입찰을 요청했습니다."
+   }
+  }
+ },
+ {
+  "id": "delegate",
+  "word": "delegate",
+  "pos": "v.",
+  "level": 4,
+  "rank": 39,
+  "ex": "A good manager knows how to delegate.",
+  "tr": {
+   "ko": {
+    "meaning": "위임하다",
+    "ex": "좋은 관리자는 위임할 줄 압니다."
+   }
+  }
+ },
+ {
+  "id": "scrutinize",
+  "word": "scrutinize",
+  "pos": "v.",
+  "level": 4,
+  "rank": 40,
+  "ex": "Auditors scrutinized every financial record.",
+  "tr": {
+   "ko": {
+    "meaning": "면밀히 조사하다",
+    "ex": "감사관들이 모든 재무 기록을 면밀히 조사했습니다."
+   }
+  }
+ },
+ {
+  "id": "ambiguous",
+  "word": "ambiguous",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 41,
+  "ex": "The wording of the clause is ambiguous.",
+  "tr": {
+   "ko": {
+    "meaning": "모호한",
+    "ex": "그 조항의 표현은 모호합니다."
+   }
+  }
+ },
+ {
+  "id": "inevitable",
+  "word": "inevitable",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 42,
+  "ex": "Some delays were inevitable.",
+  "tr": {
+   "ko": {
+    "meaning": "불가피한",
+    "ex": "일부 지연은 불가피했습니다."
+   }
+  }
+ },
+ {
+  "id": "unprecedented",
+  "word": "unprecedented",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 43,
+  "ex": "The company saw unprecedented growth.",
+  "tr": {
+   "ko": {
+    "meaning": "전례 없는",
+    "ex": "회사는 전례 없는 성장을 보였습니다."
+   }
+  }
+ },
+ {
+  "id": "lucrative",
+  "word": "lucrative",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 44,
+  "ex": "It was a lucrative business deal.",
+  "tr": {
+   "ko": {
+    "meaning": "수익성이 좋은",
+    "ex": "그것은 수익성 높은 사업 거래였습니다."
+   }
+  }
+ },
+ {
+  "id": "sustainable",
+  "word": "sustainable",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 45,
+  "ex": "We invest in sustainable energy projects.",
+  "tr": {
+   "ko": {
+    "meaning": "지속 가능한",
+    "ex": "우리는 지속 가능한 에너지 사업에 투자합니다."
+   }
+  }
+ },
+ {
+  "id": "discrepancy",
+  "word": "discrepancy",
+  "pos": "n.",
+  "level": 4,
+  "rank": 46,
+  "ex": "There is a discrepancy in the figures.",
+  "tr": {
+   "ko": {
+    "meaning": "불일치",
+    "ex": "수치에 불일치가 있습니다."
+   }
+  }
+ },
+ {
+  "id": "stakeholder",
+  "word": "stakeholder",
+  "pos": "n.",
+  "level": 4,
+  "rank": 47,
+  "ex": "All stakeholders were invited to the meeting.",
+  "tr": {
+   "ko": {
+    "meaning": "이해관계자",
+    "ex": "모든 이해관계자가 회의에 초대되었습니다."
+   }
+  }
+ },
+ {
+  "id": "remuneration",
+  "word": "remuneration",
+  "pos": "n.",
+  "level": 4,
+  "rank": 48,
+  "ex": "Remuneration depends on experience.",
+  "tr": {
+   "ko": {
+    "meaning": "보수",
+    "ex": "보수는 경력에 따라 달라집니다."
+   }
+  }
+ },
+ {
+  "id": "tenure",
+  "word": "tenure",
+  "pos": "n.",
+  "level": 4,
+  "rank": 49,
+  "ex": "During his tenure, profits doubled.",
+  "tr": {
+   "ko": {
+    "meaning": "재임 기간",
+    "ex": "그의 재임 기간 동안 이익이 두 배가 되었습니다."
+   }
+  }
+ },
+ {
+  "id": "obsolete",
+  "word": "obsolete",
+  "pos": "adj.",
+  "level": 4,
+  "rank": 50,
+  "ex": "The old system is now obsolete.",
+  "tr": {
+   "ko": {
+    "meaning": "구식의",
+    "ex": "이전 시스템은 이제 구식입니다."
+   }
+  }
+ }
+]

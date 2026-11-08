@@ -1,91 +1,214 @@
-import { useEffect, useState } from 'react'
-import type { Session } from '@supabase/supabase-js'
+import { useEffect, useMemo, useState } from 'react'
 import { configured, supabase } from './supabase'
-import Login from './components/Login'
-import LevelTest from './components/LevelTest'
-import Study from './components/Study'
-import { Privacy, Terms } from './components/Legal'
-import Account from './components/Account'
+import { DEFAULT_PROFILE, demoStore, supabaseStore } from './lib/store'
+import { initAudio } from './lib/audio'
+import type { Profile, Progress, TestResult } from './lib/types'
+import Login from './screens/Login'
+import LevelTest from './screens/LevelTest'
+import Home from './screens/Home'
+import Study from './screens/Study'
+import Settings from './screens/Settings'
+import { Privacy, Terms } from './screens/Legal'
 
-type Profile = { level: number | null; total_studied: number }
+type Screen = 'home' | 'study' | 'settings' | 'test'
+
+const getDemo = () => {
+  try {
+    return localStorage.getItem('wp_demo_user')
+  } catch {
+    return null
+  }
+}
+const setDemo = () => {
+  try {
+    localStorage.setItem('wp_demo_user', '1')
+  } catch {
+    /* ignore */
+  }
+}
 
 function useHash() {
-  const [hash, setHash] = useState(window.location.hash)
+  const [h, setH] = useState(window.location.hash)
   useEffect(() => {
-    const on = () => setHash(window.location.hash)
-    window.addEventListener('hashchange', on)
-    return () => window.removeEventListener('hashchange', on)
+    const f = () => setH(window.location.hash)
+    window.addEventListener('hashchange', f)
+    return () => window.removeEventListener('hashchange', f)
   }, [])
-  return hash
+  return h
 }
 
 export default function App() {
   const hash = useHash()
-  const [session, setSession] = useState<Session | null>(null)
-  const [ready, setReady] = useState(false)
+  if (hash === '#/privacy') return <Privacy />
+  if (hash === '#/terms') return <Terms />
+  return <Main />
+}
+
+function Main() {
+  const [userId, setUserId] = useState<string | null>(() =>
+    configured ? null : getDemo(),
+  )
+  const [authReady, setAuthReady] = useState(!configured)
   const [profile, setProfile] = useState<Profile | null>(null)
+  const [progress, setProgress] = useState<Map<string, Progress> | null>(null)
+  const [loadErr, setLoadErr] = useState('')
+  const [screen, setScreen] = useState<Screen>('home')
+  const [studyOpts, setStudyOpts] = useState({ newCount: 0, reviewBudget: 0 })
+  const [, setTick] = useState(0)
 
   useEffect(() => {
-    if (!configured) {
-      setReady(true)
-      return
-    }
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session)
-      setReady(true)
-    })
-    const { data } = supabase.auth.onAuthStateChange((_e, s) => setSession(s))
-    return () => data.subscription.unsubscribe()
+    initAudio()
   }, [])
 
   useEffect(() => {
-    if (!session) {
-      setProfile(null)
+    if (!configured) return
+    supabase.auth.getSession().then(({ data }) => {
+      setUserId(data.session?.user.id ?? null)
+      setAuthReady(true)
+    })
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setUserId(s?.user.id ?? null))
+    return () => sub.subscription.unsubscribe()
+  }, [])
+
+  const store = useMemo(
+    () =>
+      userId
+        ? configured
+          ? supabaseStore(userId)
+          : demoStore(() => setUserId(null))
+        : null,
+    [userId],
+  )
+
+  useEffect(() => {
+    setProfile(null)
+    setProgress(null)
+    setLoadErr('')
+    setScreen('home')
+    if (!store) {
+      try {
+        localStorage.removeItem('wp_test_draft')
+      } catch {
+        /* ignore */
+      }
       return
     }
-    supabase
-      .from('profiles')
-      .select('level,total_studied')
-      .eq('user_id', session.user.id)
-      .maybeSingle()
-      .then(({ data }) => setProfile(data ?? { level: null, total_studied: 0 }))
-  }, [session])
+    let alive = true
+    Promise.all([store.getProfile(), store.getProgress()])
+      .then(([p, list]) => {
+        if (!alive) return
+        setProfile(p)
+        setProgress(new Map(list.map((x) => [x.wordId, x])))
+      })
+      .catch((e) => alive && setLoadErr(e instanceof Error ? e.message : '불러오지 못했어요'))
+    return () => {
+      alive = false
+    }
+  }, [store])
 
-  if (hash === '#/privacy') return <Privacy />
-  if (hash === '#/terms') return <Terms />
+  if (!authReady) return <main className="screen center center-text">불러오는 중…</main>
 
-  if (!configured) {
+  if (!store) {
     return (
-      <main className="page">
-        <h1>Word Pop</h1>
-        <p className="notice">
-          Supabase 환경변수(VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)가 설정되지 않았어요.
+      <Login
+        onDemo={() => {
+          setDemo()
+          setUserId('demo')
+        }}
+      />
+    )
+  }
+
+  if (loadErr) {
+    return (
+      <main className="screen center center-text">
+        <p className="error">{loadErr}</p>
+        <p className="mute small">
+          Supabase에 supabase/schema.sql을 실행했는지 확인해 주세요.
         </p>
+        <button className="btn" onClick={() => window.location.reload()}>
+          다시 시도
+        </button>
+        <button className="btn ghost" onClick={() => store.signOut()}>
+          로그아웃
+        </button>
       </main>
     )
   }
 
-  if (!ready) return <main className="page">불러오는 중…</main>
-  if (!session) return <Login />
-  if (!profile) return <main className="page">불러오는 중…</main>
+  if (!profile || !progress) return <main className="screen center center-text">불러오는 중…</main>
 
-  if (hash === '#/account') return <Account session={session} />
+  const patchProfile = (patch: Partial<Profile>) => {
+    setProfile((p) => ({ ...(p ?? DEFAULT_PROFILE), ...patch }))
+    store.saveProfile(patch).catch((e) => setLoadErr(e instanceof Error ? e.message : '저장 실패'))
+  }
 
-  if (profile.level == null) {
+  async function finishTest(level: number, result: TestResult) {
+    await store!.saveLevelTest(result)
+    await store!.saveProfile({ level, tested: true })
+    setProfile((p) => ({ ...(p ?? DEFAULT_PROFILE), level, tested: true }))
+    setScreen('home')
+  }
+
+  // 처음이면 레벨 테스트부터
+  if (!profile.tested || profile.level == null) {
+    return <LevelTest autoAudio={profile.autoAudio} onFinish={finishTest} />
+  }
+
+  if (screen === 'test') {
     return (
-      <LevelTest
-        userId={session.user.id}
-        onDone={(level) => setProfile({ level, total_studied: profile.total_studied })}
+      <LevelTest autoAudio={profile.autoAudio} onFinish={finishTest} onCancel={() => setScreen('settings')} />
+    )
+  }
+
+  if (screen === 'study') {
+    return (
+      <Study
+        store={store}
+        profile={profile}
+        initial={[...progress.values()]}
+        newCount={studyOpts.newCount}
+        reviewBudget={studyOpts.reviewBudget}
+        onLevelUp={(level) => patchProfile({ level })}
+        onExit={(list) => {
+          setProgress(new Map(list.map((x) => [x.wordId, x])))
+          setScreen('home')
+        }}
+      />
+    )
+  }
+
+  if (screen === 'settings') {
+    return (
+      <Settings
+        profile={profile}
+        store={store}
+        onChange={patchProfile}
+        onRetest={() => {
+          try {
+            localStorage.removeItem('wp_test_draft')
+          } catch {
+            /* ignore */
+          }
+          setScreen('test')
+        }}
+        onBack={() => setScreen('home')}
+        onClock={() => setTick((n) => n + 1)}
       />
     )
   }
 
   return (
-    <Study
-      userId={session.user.id}
-      level={profile.level}
-      initialTotal={profile.total_studied}
-      onRetest={() => setProfile({ level: null, total_studied: profile.total_studied })}
+    <Home
+      profile={profile}
+      progress={progress}
+      demo={store.demo}
+      onStart={(o) => {
+        setStudyOpts(o)
+        setScreen('study')
+      }}
+      onSettings={() => setScreen('settings')}
+      onLevelUp={() => patchProfile({ level: Math.min(4, (profile.level ?? 1) + 1) })}
     />
   )
 }
