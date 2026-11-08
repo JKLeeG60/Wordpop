@@ -264,8 +264,10 @@ export default function Study({
           {hint && <span className={`stamp ${hint}`}>{hint === 'know' ? '알아요' : '몰라요'}</span>}
           {!flipped ? (
             <div className="face">
-              <div className="word">{word.word}</div>
-              <div className="mute">{word.pos}</div>
+              <div className="word-line">
+                <span className="pos">{word.pos}</span>
+                <span className="word">{word.word}</span>
+              </div>
               <button
                 className="speak"
                 onPointerDown={(e) => e.stopPropagation()}
@@ -295,7 +297,7 @@ export default function Study({
                   }}
                   aria-label="예문 듣기"
                 >
-                  🔊 예문
+                  🔊
                 </button>
               </div>
             </div>
@@ -307,8 +309,14 @@ export default function Study({
         <button className="btn unknown" onClick={() => judge(false)}>
           ← 몰라요
         </button>
-        <button className="icon-btn" onClick={undo} disabled={!hist.length} aria-label="되돌리기">
-          ↶
+        <button
+          className="btn undo"
+          onClick={undo}
+          disabled={!hist.length}
+          aria-label="이전 카드로 되돌리기"
+          style={{ visibility: hist.length ? 'visible' : 'hidden' }}
+        >
+          ↶ 이전
         </button>
         <button className="btn know" onClick={askKnow}>
           알아요 ↑

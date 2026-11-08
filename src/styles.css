@@ -219,9 +219,33 @@ h3 {
   font-weight: 700;
   color: #d9480f;
 }
-.chart {
-  width: 100%;
+.chart-box {
+  flex: 1;
+  min-height: 120px;
   margin-top: 8px;
+  overflow: hidden;
+}
+.chart-box svg {
+  display: block;
+}
+.val {
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--accent);
+}
+/* 홈: 카드들이 화면 높이를 채우도록 늘어난다 */
+.home .panel {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.home .panel.chart-panel {
+  flex: 3 1 auto;
+  justify-content: flex-start;
+}
+.home .grid2 {
+  flex: 1 1 auto;
 }
 .axis {
   font-size: 10px;
@@ -268,14 +292,30 @@ h3 {
   margin-top: 8px;
   border: 1px solid var(--line);
   background: var(--card);
-  border-radius: 999px;
-  padding: 8px 14px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 18px;
   cursor: pointer;
 }
 .speak.sm {
-  font-size: 14px;
-  padding: 5px 12px;
+  font-size: 15px;
+  width: 38px;
+  height: 38px;
+}
+.word-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+}
+.word-line .pos {
+  font-size: 18px;
+  color: var(--mute);
 }
 .options {
   display: flex;
@@ -373,6 +413,12 @@ h3 {
 }
 .actions .btn {
   flex: 1;
+}
+.actions .btn.undo {
+  flex: none;
+  padding: 13px 12px;
+  font-size: 14px;
+  color: var(--mute);
 }
 .keys {
   margin: 4px 0 0;

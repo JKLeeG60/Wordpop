@@ -166,8 +166,9 @@ export function cumulativeSeries(progress: Map<string, Progress>, t: number, day
   for (let i = days - 1; i >= 0; i--) {
     const dayStart = startOfDay(t - i * DAY)
     const end = dayStart + DAY
+    const d = new Date(dayStart)
     out.push({
-      label: localDate(dayStart).slice(5).replace('-', '/'),
+      label: `${d.getMonth() + 1}. ${d.getDate()}.`,
       value: list.filter((p) => p.firstSeenAt < end).length,
     })
   }

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { LEVEL_NAMES, WORDS, wordsOfLevel } from '../lib/words'
 import { now } from '../lib/clock'
 import {
@@ -48,15 +49,25 @@ export default function Home({
   const newN = Math.min(Math.max(0, goal - doneNew), fresh, Math.max(0, SESSION_MAX - reviewN))
   const nothing = reviewN === 0 && newN === 0
 
-  // 누적 그래프
-  const W = 300
-  const H = 90
+  // 누적 그래프: 영역 크기를 재서 그 크기에 맞게 그린다 (화면 높이에 따라 늘어남)
+  const boxRef = useRef<HTMLDivElement>(null)
+  const [size, setSize] = useState({ w: 300, h: 120 })
+  useEffect(() => {
+    const el = boxRef.current
+    if (!el) return
+    const ro = new ResizeObserver(() => setSize({ w: el.clientWidth, h: el.clientHeight }))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+  const { w: W, h: H } = size
+  const TOP = 26
+  const BOTTOM = 22
   const max = Math.max(1, ...series.map((s) => s.value))
   const min = Math.min(...series.map((s) => s.value))
   const span = Math.max(1, max - min)
   const pts = series.map((s, i) => {
-    const x = 20 + (i * (W - 40)) / (series.length - 1)
-    const y = 10 + (H - 24) - ((s.value - min) / span) * (H - 34)
+    const x = 24 + (i * (W - 48)) / (series.length - 1)
+    const y = TOP + (1 - (s.value - min) / span) * Math.max(10, H - TOP - BOTTOM)
     return [x, y] as const
   })
   const line = pts.map((p) => p.join(',')).join(' ')
@@ -70,7 +81,7 @@ export default function Home({
   }
 
   return (
-    <main className="screen">
+    <main className="screen home">
       <div className="row between">
         <div>
           <div className="brand sm">Word Pop</div>
@@ -83,7 +94,7 @@ export default function Home({
 
       {demo && <div className="banner">데모 모드 · 기록은 이 브라우저에만 저장돼요</div>}
 
-      <div className="panel mt">
+      <div className="panel chart-panel mt">
         <div className="row between">
           <div className="stat-big">
             <b>{learned}</b>
@@ -91,17 +102,22 @@ export default function Home({
           </div>
           <div className="streak">🔥 {streak}일 연속</div>
         </div>
-        <svg viewBox={`0 0 ${W} ${H}`} className="chart" role="img" aria-label="최근 7일 누적 학습 카드">
-          <polyline points={line} fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinejoin="round" />
-          {pts.map((p, i) => (
-            <g key={i}>
-              <circle cx={p[0]} cy={p[1]} r="3.5" fill="var(--accent)" />
-              <text x={p[0]} y={H - 2} textAnchor="middle" className="axis">
-                {series[i].label}
-              </text>
-            </g>
-          ))}
-        </svg>
+        <div className="chart-box" ref={boxRef}>
+          <svg width={W} height={H} role="img" aria-label="최근 7일 누적 학습 카드">
+            <polyline points={line} fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinejoin="round" />
+            {pts.map((p, i) => (
+              <g key={i}>
+                <circle cx={p[0]} cy={p[1]} r="3.5" fill="var(--accent)" />
+                <text x={p[0]} y={p[1] - 9} textAnchor="middle" className="val">
+                  {series[i].value}
+                </text>
+                <text x={p[0]} y={H - 4} textAnchor="middle" className="axis">
+                  {series[i].label}
+                </text>
+              </g>
+            ))}
+          </svg>
+        </div>
       </div>
 
       <div className="grid2 mt">
@@ -149,8 +165,7 @@ export default function Home({
         )}
       </div>
 
-      <div className="spacer" />
-      <button className="btn primary block" onClick={start} disabled={nothing && fresh === 0}>
+      <button className="btn primary block mt" onClick={start} disabled={nothing && fresh === 0}>
         {nothing
           ? fresh > 0
             ? '오늘 목표 완료 🎉 새 단어 10개 더'
