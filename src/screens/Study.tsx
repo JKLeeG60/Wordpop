@@ -55,6 +55,7 @@ export default function Study({
 
   const [queue, setQueue] = useState<Item[]>(() => build(newCount, reviewBudget))
   const [flipped, setFlipped] = useState(false)
+  const [seenBack, setSeenBack] = useState(false) // 이 카드의 뒷면을 한 번이라도 봤는지
   const [hist, setHist] = useState<Hist[]>([])
   const [known, setKnown] = useState(0)
   const [unknown, setUnknown] = useState(0)
@@ -120,6 +121,7 @@ export default function Study({
   // 카드가 바뀔 때마다 응답 시간 측정 + 발음 자동 재생
   useEffect(() => {
     shownAt.current = Date.now()
+    setSeenBack(false)
     if (word && profile.autoAudio) speak(word.word)
   }, [head?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -153,6 +155,7 @@ export default function Study({
     setHist((h) => [...h, { queue, wordId: it.id, prev, logP, known: isKnown }])
     setQueue(rest)
     setFlipped(false)
+    setSeenBack(false)
     setConfirm(false)
     if (isKnown) setKnown((n) => n + 1)
     else setUnknown((n) => n + 1)
@@ -173,13 +176,19 @@ export default function Study({
     setHist((x) => x.slice(0, -1))
     setQueue(h.queue)
     setFlipped(false)
+    setSeenBack(false)
     setConfirm(false)
     if (h.known) setKnown((n) => n - 1)
     else setUnknown((n) => n - 1)
   }
 
-  // 위로 밀기/알아요: 뒤집기 전이면 정말 아는지 한 번 더 확인
-  const askKnow = () => (flipped || !profile.confirmKnow ? judge(true) : setConfirm(true))
+  // 뒷면이 보이면 '봤음'으로 기록 (앞면으로 다시 돌아와도 유지)
+  useEffect(() => {
+    if (flipped) setSeenBack(true)
+  }, [flipped])
+
+  // 위로 밀기/알아요: 뒷면을 한 번도 안 봤으면 정말 아는지 한 번 더 확인
+  const askKnow = () => (flipped || seenBack || !profile.confirmKnow ? judge(true) : setConfirm(true))
 
   const keys = useRef<(e: KeyboardEvent) => void>(() => undefined)
   keys.current = (e) => {

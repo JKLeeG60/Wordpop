@@ -55,7 +55,7 @@ export function speak(text: string, rate = 0.9) {
   window.clearTimeout(timer)
   const synth = window.speechSynthesis
   synth.cancel()
-  // cancel 직후 바로 speak 하면 일부 브라우저(iOS)에서 무시되어 짧게 지연한다.
+  // cancel 직후 바로 speak 하면 일부 브라우저(iOS)에서 무시되고, 음성 엔진 준비 중엔 앞소리가 잘려 0.5초 기다린다.
   timer = window.setTimeout(() => {
     const u = new SpeechSynthesisUtterance(text)
     u.lang = lang
@@ -63,7 +63,7 @@ export function speak(text: string, rate = 0.9) {
     const v = cached ?? pickVoice()
     if (v) u.voice = v
     synth.speak(u)
-  }, 60)
+  }, 500)
   return true
 }
 
